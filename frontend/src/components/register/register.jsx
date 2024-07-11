@@ -1,62 +1,79 @@
 import React from "react";
-/* import "./register.css"; */
 
 export const Register = () => {
     return (
         <section className='register'>
-            <h2 className='pl-6 pb-6 pt-14 font-bold text-2xl'>Registro</h2>
-            <form className="bg-white p-6 pt-2 pb-14 rounded-lg shadow-md w-full max-w-sm mb-4">
-                <div className="mb-6">                    
+            <h2 className='pl-6 pb-4 pt-7 font-bold text-2xl'>Registro</h2>
+            <form className="bg-white p-6 pt-2 pb-10 rounded-lg shadow-md w-full max-w-sm mb-4">
+                <div className="mb-4">
+                    <label htmlFor="nombre" className="block text-sm text-gray-700 font-semibold mb-0">
+                        Nombre
+                    </label>
                     <input
                         type="text"
                         id="nombre"
                         name="nombre"
-                        placeholder="Nombre"
+                        placeholder="María"
                         className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-violet focus:border-transparent border-gray-300"
                     />
                 </div>
-                <div className="mb-6">                    
+                <div className="mb-4">
+                    <label htmlFor="apellido" className="block text-sm text-gray-700 font-semibold mb-0">
+                       Apellido
+                    </label>
                     <input
                         type="text"
                         id="apellido"
                         name="apellido"
-                        placeholder="Apellido"
+                        placeholder="Perez"
                         className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-violet focus:border-transparent border-gray-300"
                     />
                 </div>
-                <div className="mb-6">                    
+                <div className="mb-4">
+                    <label htmlFor="email" className="block text-sm text-gray-700 font-semibold mb-0">
+                        Email
+                    </label>
                     <input
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="tuemail@mail.com"
                         className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-violet focus:border-transparent border-gray-300"
                     />
                 </div>
-                <div className="mb-6">                    
+                <div className="mb-4">
+                    <label htmlFor="username" className="block text-sm text-gray-700 font-semibold mb-0">
+                    Nombre de usuario
+                    </label>
                     <input
                         type="text"
                         id="username"
                         name="username"
-                        placeholder="Nombre de usuario"
+                        placeholder="Maria123"
                         className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-violet focus:border-transparent border-gray-300"
                     />
                 </div>
-                <div className="mb-6">                    
+                <div className="mb-4">
+                    <label htmlFor="password" className="block text-sm text-gray-700 font-semibold mb-0">
+                        Contraseña
+                    </label>
                     <input
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Contraseña"
+                        placeholder="********"
                         className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-violet focus:border-transparent border-gray-300"
                     />
                 </div>
-                <div className="mb-14">                    
+                <div className="mb-8">
+                    <label htmlFor="repeatPassword" className="block text-sm text-gray-700 font-semibold mb-0">
+                        Repetir contraseña
+                    </label>
                     <input
                         type="password"
                         id="repeatPassword"
                         name="repeatPassword"
-                        placeholder="Repetir contraseña"
+                        placeholder="********"
                         className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-violet focus:border-transparent border-gray-300"
                     />
                 </div>
@@ -65,7 +82,7 @@ export const Register = () => {
                 </button>
             </form>     
                 
-            <p className="text-center text-xs">¿Ya tienes una cuenta? <a href="#" className="text-custom-violet font-semibold">Inicia sesión</a></p>                       
+            <p className="text-center text-xs">Ya tienes una cuenta? <a href="#" className="text-custom-violet font-semibold">Inicia sesión</a></p>                       
         </section>
     )
   }
