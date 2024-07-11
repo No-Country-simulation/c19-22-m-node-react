@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-import Histories from "./components/histories/Histories";
+
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import Posts from "./components/posts/Posts";
@@ -23,7 +23,6 @@ function App() {
           element={
             <>
               <Navbar />
-              <Histories />
               <Posts />
             </>
           }
