@@ -2,7 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-violet': '#712F8E',
+        'custom-violet-hover': '#61237b',
+      },
+    },
   },
   plugins: [],
 };
