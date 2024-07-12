@@ -7,6 +7,9 @@ export default {
         'custom-violet': '#712F8E',
         'custom-violet-hover': '#61237b',
       },
+      fontSize: {
+        'xxs': '0.6875rem', // 11px
+      },
     },
   },
   plugins: [],
