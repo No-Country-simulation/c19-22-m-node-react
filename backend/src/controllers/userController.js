@@ -1,6 +1,8 @@
 import { User } from '../models/user.model.js';
 import AppDataSource from '../config/db.js';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 const register = async (req, res) => {
 	try {
@@ -35,7 +37,11 @@ const register = async (req, res) => {
 		await userRepository.save(user);
 		console.log(user);
 
-		return res.json({ ok: true, msg: 'register good' });
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+			expiresIn: '1h',
+		});
+
+		return res.json({ ok: true, token });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ msg: 'Error server' });
