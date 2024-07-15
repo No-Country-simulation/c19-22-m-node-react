@@ -6,6 +6,7 @@ import { Register } from "./components/register/Register"
 import { Home } from './components/home/Home';
 import { Navbar } from './components/navbar/Navbar';
 import { Header } from './components/header/Header';
+import { Profile } from './components/profile/Profile';
 
 function App() {
   return (
@@ -23,7 +24,12 @@ function App() {
                 <Home/>
                 <Navbar/>
               </div> }/>
-                              
+          <Route path="/profile" element={ 
+              <div className='min-h-screen flex flex-col'>
+                <Header/>
+                <Profile/>
+                <Navbar/>
+              </div> }/>                    
       </Routes>
     </BrowserRouter>      
     </>
