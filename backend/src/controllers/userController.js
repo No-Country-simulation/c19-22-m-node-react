@@ -69,7 +69,11 @@ const login = async (req, res) => {
 			return res.status(400).json({ msg: 'Username or password incorrect' });
 		}
 
-		return res.json({ ok: true, msg: 'login good' });
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+			expiresIn: '1h',
+		});
+
+		return res.json({ ok: true, token });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ msg: 'Error server' });
