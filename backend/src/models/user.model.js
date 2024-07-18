@@ -25,4 +25,16 @@ export const User = new EntitySchema({
 			type: 'varchar',
 		},
 	},
+	relations: {
+		friends: {
+			target: 'User',
+			type: 'many-to-many',
+			joinTable: {
+				name: 'user_friends',
+				joinColumn: { name: 'userId', referencedColumnName: 'id' },
+				inverseJoinColumn: { name: 'friendId', referencedColumnName: 'id' },
+			},
+			cascade: true,
+		},
+	},
 });
