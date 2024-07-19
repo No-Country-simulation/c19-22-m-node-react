@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import { User } from '../models/user.model.js';
 import 'dotenv/config';
 import { FriendRequest } from '../models/friendRequest.model.js';
+import { Notification } from '../models/notifications.model.js';
 
 const AppDataSource = new DataSource({
 	type: 'postgres',
@@ -12,7 +13,7 @@ const AppDataSource = new DataSource({
 	database: process.env.DB_NAME,
 	synchronize: true,
 	logging: false,
-	entities: [User, FriendRequest],
+	entities: [User, FriendRequest, Notification],
 	migrations: [],
 	subscribers: [],
 });
