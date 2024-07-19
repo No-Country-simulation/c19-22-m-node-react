@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineHeart } from 'react-icons/ai'
+
 import { FaHeart } from "react-icons/fa"
 import { BiMessage } from "react-icons/bi"
 import imagePost from '../../assets/imagePost.jpg'

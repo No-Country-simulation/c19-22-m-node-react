@@ -2,45 +2,55 @@ import React from "react";
 /* import { useHistory } from 'react-router-dom'; */
 import { useNavigate } from 'react-router-dom';
 import MGlassMenu from "../MGlassMenu/MGlassMenu";
+import { HomeOutlineIcon } from "../icons/HomeOutlineIcon";
+import { HomeFilledIcon } from "../icons/HomeFilledIcon";
+import { PublishOutlineIcon } from "../icons/PublishOutlineIcon";
+import { PublishFilledIcon } from "../icons/PublishFilledIcon";
+import { ProfileFilledIcon } from "../icons/ProfileFilledIcon";
+import { ProfileOutlineIcon } from "../icons/ProfileOutlineIcon";
+import { NotificationsFilledIcon } from "../icons/NotificationsFilledIcon";
+import { NotificationsOutlineIcon } from "../icons/NotificationsOutlineIcon";
 
 
 export const Navbar = () => {
 
   let navigate =useNavigate();
 
-    const redirectToProfile = () => {
-        navigate('/profile');
-    };
+  const redirectToProfile = () => {
+      navigate('/profile');
+  };
 
-    const redirectToHome = () => {
-      navigate('/home');
+  const redirectToHome = () => {
+    navigate('/home');
+  };
+
+  const redirectToPublish = () => {
+    navigate('/publish');
+  };
+
+  const redirectToNotifications = () => {
+    navigate('/notifications');
   };
   
+  const pathname = window.location.pathname
+  
+
 
   return (
-      <section className='navbar sticky bottom-0 mt-auto shadow-up-md bg-custom-violet flex px-4 justify-between items-center'>
-        <button onClick={redirectToHome} className="home text-white p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-        </button>
-        {/* <button className="search text-white p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-        </button> */}
+      <section className='navbar sticky bottom-0 mt-auto shadow-up-md bg-primario flex px-4 justify-between items-center'>
+        <button onClick={redirectToHome} className="home text-white p-3">
+          {pathname == "/home"? <HomeFilledIcon/>: <HomeOutlineIcon/>}
+        </button>        
         <MGlassMenu/>
-        <button className="plus text-white p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
+        <button onClick={redirectToPublish} className="plus text-white p-3">
+          {pathname == "/publish"? <PublishFilledIcon/>: <PublishOutlineIcon/>}
         </button>
-        <button className="bell text-white p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-            </svg>
+        <button onClick={redirectToNotifications} className="notifications text-white p-3">
+          {pathname == "/notifications"? <NotificationsFilledIcon/>: <NotificationsOutlineIcon/>}
         </button>
-        <button onClick={redirectToProfile} className="bell text-white p-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-            </svg>
+        <button onClick={redirectToProfile} className="bell text-white p-3">
+          {pathname == "/profile"? <ProfileFilledIcon/>: <ProfileOutlineIcon/>}
         </button>
-          
       </section>
   )
 }
