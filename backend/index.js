@@ -2,12 +2,12 @@ import express from 'express';
 import AppDataSource from './src/config/db.js';
 import userRoutes from './src/routes/user.routes.js';
 import 'dotenv/config';
-// import cors from 'cors';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
