@@ -8,6 +8,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+	res.send('Hello World!');
+});
+
 app.use('/api/v1/users', userRoutes);
 
 AppDataSource.initialize()
