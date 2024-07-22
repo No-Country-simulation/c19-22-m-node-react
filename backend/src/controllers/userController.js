@@ -1,6 +1,9 @@
 import { User } from '../models/user.model.js';
+import { FriendRequest } from '../models/friendRequest.model.js';
 import AppDataSource from '../config/db.js';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 const register = async (req, res) => {
 	try {
@@ -35,7 +38,11 @@ const register = async (req, res) => {
 		await userRepository.save(user);
 		console.log(user);
 
-		return res.json({ ok: true, msg: 'register good' });
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+			expiresIn: '1h',
+		});
+
+		return res.json({ ok: true, token });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ msg: 'Error server' });
@@ -63,7 +70,107 @@ const login = async (req, res) => {
 			return res.status(400).json({ msg: 'Username or password incorrect' });
 		}
 
-		return res.json({ ok: true, msg: 'login good' });
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+			expiresIn: '1h',
+		});
+
+		return res.json({ ok: true, token });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Error server' });
+	}
+};
+
+const profile = async (req, res) => {
+	try {
+		const user = await AppDataSource.getRepository(User).findOne({
+			where: { id: req.userId },
+		});
+		return res.json(user);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Error server' });
+	}
+};
+
+const sendFriendRequest = async (req, res) => {
+	try {
+		const { senderId, receiverId } = req.body;
+
+		if (!senderId || !receiverId) {
+			return res.status(400).json({ msg: 'Missing parameters' });
+		}
+
+		const friendRequestRepository = AppDataSource.getRepository(FriendRequest);
+		const friendRequest = friendRequestRepository.create({
+			senderId,
+			receiverId,
+		});
+
+		await friendRequestRepository.save(friendRequest);
+		return res.json({ ok: true, friendRequest });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Error server' });
+	}
+};
+
+const acceptFriendRequest = async (req, res) => {
+	try {
+		const { requestId } = req.body;
+
+		const friendRequestRepository = AppDataSource.getRepository(FriendRequest);
+		const friendRequest = await friendRequestRepository.findOne({
+			where: { id: requestId },
+		});
+
+		if (!friendRequest) {
+			return res.status(404).json({ msg: 'Friend request not found' });
+		}
+
+		const userRepository = AppDataSource.getRepository(User);
+		const sender = await userRepository.findOne({
+			where: { id: friendRequest.senderId },
+			relations: ['friends'],
+		});
+		const receiver = await userRepository.findOne({
+			where: { id: friendRequest.receiverId },
+			relations: ['friends'],
+		});
+
+		sender.friends.push(receiver);
+		receiver.friends.push(sender);
+
+		await userRepository.save(sender);
+		await userRepository.save(receiver);
+
+		friendRequest.status = 'accepted';
+		await friendRequestRepository.save(friendRequest);
+
+		return res.json({ ok: true });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Error server' });
+	}
+};
+
+const rejectFriendRequest = async (req, res) => {
+	try {
+		const { requestId } = req.body;
+
+		const friendRequestRepository = AppDataSource.getRepository(FriendRequest);
+		const friendRequest = await friendRequestRepository.findOne({
+			where: { id: requestId },
+		});
+
+		if (!friendRequest) {
+			return res.status(404).json({ msg: 'Friend request not found' });
+		}
+
+		friendRequest.status = 'rejected';
+		await friendRequestRepository.save(friendRequest);
+
+		return res.json({ ok: true });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ msg: 'Error server' });
@@ -73,4 +180,8 @@ const login = async (req, res) => {
 export const UserController = {
 	register,
 	login,
+	profile,
+	sendFriendRequest,
+	acceptFriendRequest,
+	rejectFriendRequest,
 };
