@@ -10,6 +10,7 @@ import { ProfileFilledIcon } from "../icons/ProfileFilledIcon";
 import { ProfileOutlineIcon } from "../icons/ProfileOutlineIcon";
 import { NotificationsFilledIcon } from "../icons/NotificationsFilledIcon";
 import { NotificationsOutlineIcon } from "../icons/NotificationsOutlineIcon";
+import { FindIcon } from "../icons/FindIcon";
 
 
 export const Navbar = () => {
@@ -22,6 +23,10 @@ export const Navbar = () => {
 
   const redirectToHome = () => {
     navigate('/home');
+  };
+
+  const redirectToFind = () => {
+    navigate('/find');
   };
 
   const redirectToPublish = () => {
@@ -41,7 +46,10 @@ export const Navbar = () => {
         <button onClick={redirectToHome} className="home text-white p-3">
           {pathname == "/home"? <HomeFilledIcon/>: <HomeOutlineIcon/>}
         </button>        
-        <MGlassMenu/>
+        {/* <MGlassMenu/> */}
+        <button onClick={redirectToFind} className="find text-white p-3">
+          {pathname == "/find"? <FindIcon/>: <FindIcon/>}
+        </button>
         <button onClick={redirectToPublish} className="plus text-white p-3">
           {pathname == "/publish"? <PublishFilledIcon/>: <PublishOutlineIcon/>}
         </button>

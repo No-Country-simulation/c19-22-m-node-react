@@ -4,18 +4,12 @@ import colorPickerIcon from '../../assets/iconoColorPicker.png'
 
 
 
-const ColorPicker = ({ onColorChange }) => {
+const ColorPicker = ({ onColorChange, sendClean }) => {
     const [showCP, setShowCP] = useState(false)
     
-
-    /* useEffect(() => {
-        if (showMGlass && inputRef.current) {
-            inputRef.current.focus()
-        }
-    }, [showMGlass]) */
-
     const handleOpenCP = () => {
-        setShowCP(true)
+        setShowCP(true)        
+        sendClean(true)
     }
 
     const handleCloseCP = () => {

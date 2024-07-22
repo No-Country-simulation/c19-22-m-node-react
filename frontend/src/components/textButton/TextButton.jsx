@@ -9,17 +9,19 @@ import { RiFontSize } from "react-icons/ri";
 
 
 
-const TextButton = ({textColorSelected}) => {
+const TextButton = ({textColorSelected, readyToWrite}) => {
     const [showTEditor, setShowTEditor] = useState(false)
     
 
     const handleOpenT = () => {
-        setShowTEditor(true)
-    }
+    setShowTEditor(true);
+    readyToWrite(true);
+};
 
-    const handleCloseT = () => {
-        setShowTEditor(false)
-    }
+const handleCloseT = () => {
+    setShowTEditor(false);
+    readyToWrite(false);
+};
 
     const [colorSeleccionado, setColorSeleccionado] = useState('');
 
@@ -62,7 +64,7 @@ const TextButton = ({textColorSelected}) => {
                                 <CiTextAlignCenter className="h-[24px] w-[24px]"/>
                             </button>
 
-                            <ColorPicker onColorChange={manejarCambioColor}/>
+                            <ColorPicker sendClean={() => {}} onColorChange={manejarCambioColor}/>
 
                             <button className='font-type text-white'>
                                 <RiFontSize className="h-[24px] w-[24px]"/>
