@@ -4,22 +4,20 @@ import colorPickerIcon from '../../assets/iconoColorPicker.png'
 
 
 
-const ColorPicker = ({ onColorChange }) => {
+const ColorPicker = ({ onColorChange, sendClean, paraPasarRef }) => {
     const [showCP, setShowCP] = useState(false)
     
-
-    /* useEffect(() => {
-        if (showMGlass && inputRef.current) {
-            inputRef.current.focus()
-        }
-    }, [showMGlass]) */
-
     const handleOpenCP = () => {
-        setShowCP(true)
+        setShowCP(true)        
+        sendClean(true)
     }
 
     const handleCloseCP = () => {
         setShowCP(false)
+        if (paraPasarRef){
+            paraPasarRef()
+        }
+        
     }
 
     const colors = ['#F3F3F3', '#FFF8CA', '#CCD29A', '#B1D9D8', '#CDB9D6', '#FFAAA0', '#9E9E9E', '#C3B170', '#808900', '#10888D', '#945CCB', '#D44939', '#858585', '#73673E', '#545A00', '#0F4956', '#51247E', '#742909',  ];

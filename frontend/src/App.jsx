@@ -11,6 +11,12 @@ import { Notifications } from './components/notifications/Notifications';
 import { Login } from './components/login/Login';
 import { PublishPic } from './components/publishPic.jsx/PublishPic';
 import { PublishColorPicker } from './components/publishColorPicker/PublishColorPicker';
+import { Comments } from './components/notifications/Comments';
+import { Followers } from './components/notifications/Followers';
+import { Find } from './components/find/Find';
+import { Hashtags } from './components/find/Hashtags';
+import { Accounts } from './components/find/Accounts';
+import { ResultsGrid } from './components/find/ResultsGrid';
 
 function App() {
   return (
@@ -32,6 +38,31 @@ function App() {
                 <Home/>
                 <Navbar/>
               </div> }/>
+
+          <Route path="/find" element={ 
+              <div className='min-h-screen flex flex-col'>
+                <Header/>
+                <Find/>
+                <Navbar/>
+              </div> }/>
+          <Route path="/accounts" element={ 
+              <div className='min-h-screen flex flex-col'>
+                
+                <Accounts/>
+                <Navbar/>
+              </div> }/>
+          <Route path="/hashtags" element={ 
+              <div className='min-h-screen flex flex-col'>
+                
+                <Hashtags/>
+                <Navbar/>
+              </div> }/>
+          <Route path="/results" element={ 
+              <div className='min-h-screen flex flex-col'>
+                <Header/>
+                <ResultsGrid/>
+                <Navbar/>
+              </div> }/> 
           <Route path="/profile" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
@@ -61,7 +92,19 @@ function App() {
                 <Header/>
                 <Notifications/>
                 <Navbar/>
-              </div> }/>                   
+              </div> }/>
+          <Route path="/comments" element={ 
+              <div className='min-h-screen flex flex-col'>
+                <Header/>
+                <Comments/>
+                <Navbar/>
+              </div> }/>
+          <Route path="/followers" element={ 
+              <div className='min-h-screen flex flex-col'>
+                <Header/>
+                <Followers/>
+                <Navbar/>
+              </div> }/>   
       </Routes>
     </BrowserRouter>      
     </>

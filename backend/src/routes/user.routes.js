@@ -20,4 +20,9 @@ router.post(
 	UserController.rejectFriendRequest,
 );
 
+router.post('/register', (req, res, next) => {
+	console.log('Received register request');
+	return UserController.register(req, res, next);
+});
+
 export default router;
