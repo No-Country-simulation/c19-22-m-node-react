@@ -12,6 +12,10 @@ export const User = new EntitySchema({
 		name: {
 			type: 'varchar',
 		},
+		profilePic: {
+			type: 'varchar',
+			default: '../utils/images.jpg',
+		},
 		lastname: {
 			type: 'varchar',
 		},
