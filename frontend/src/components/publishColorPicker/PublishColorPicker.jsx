@@ -6,11 +6,18 @@ import ColorPicker from "../colorPicker/ColorPicker";
 import { useState, useRef, useEffect } from "react";
 import TextButton from "../textButton/TextButton";
 import Upload from "../upload/Upload";
+import { useAlignChange } from '../../hooks/useAlignChange.js';
+import { useFontChange } from '../../hooks/useFontChange';
 
 
 
 
 export const PublishColorPicker = () => {
+
+    const {handleChangeAlign, changeAlign} = useAlignChange()
+    const {handleFontChange, fontChange} = useFontChange()
+
+
     const [colorSeleccionado, setColorSeleccionado] = useState('');
     const [colorSeleccionadoTexto, setColorSeleccionadoTexto] = useState('');
     const [pantallaLimpia, setPantallaLimpia] = useState(true);
@@ -30,31 +37,17 @@ export const PublishColorPicker = () => {
 
     const manejarCambioColorTexto = (color) => {
         setColorSeleccionadoTexto(color);
+        inputRef.current.focus()
     };
 
     const handleWrite = (bool) => {
         setWrite(bool);
     };
 
-    /* const handleColorPickerClick = (bool) => {
-        setPantallaLimpia(bool)
-    }; */
-
-    //ABRIR WEBCAM DE FER
-    /* const abrirWebcam = async () => {
-        try {
-            setColorSeleccionado('');
-            setPantallaLimpia(false);
-            const stream = await navigator.mediaDevices.getUserMedia({video: true});
-            videoRef.current.srcObject = stream;
-
-            imageR.current.classList.add("hidden");
-            videoRef.current.classList.remove("hidden");
-            setVideoRender(true)
-        } catch (error) {
-            console.log(error);
-        }
-    }; */
+    const focus = () => {
+        inputRef.current.focus()
+    }
+    
 
     const [currentStream, setCurrentStream] = useState(null);
 
@@ -112,20 +105,6 @@ export const PublishColorPicker = () => {
     
 
 
-    //TOMAR FOTO DE FER
-    /* const tomarFoto = () => {
-        pic.current.width = videoRef.current.videoWidth;
-        pic.current.height = videoRef.current.videoHeight;
-        pic.current.getContext("2d").drawImage(videoRef.current, 0, 0);
-        const foto = pic.current.toDataURL("image/jpg");
-        imageR.current.src = foto;
-        imageR.current.classList.remove("hidden");
-        videoRef.current.classList.add("hidden");
-        setPicDone(foto);
-        setPantallaLimpia(false);
-    }; */
-
-
     useEffect(() => {
         return () => {
             if (currentStream) {
@@ -134,7 +113,11 @@ export const PublishColorPicker = () => {
         };
     }, [currentStream]);
 
+
+
     const inputRef = useRef(null)
+    
+
 
     useEffect(() => {
         if (write && inputRef.current) {
@@ -143,9 +126,16 @@ export const PublishColorPicker = () => {
     }, [write])
 
 
+
+
     const handleColorPickerClick = (bool) => {
         setPantallaLimpia(bool)
     };
+
+    /* console.log('changeAlign',changeAlign)
+    console.log('fontChange',fontChange) */
+    
+
 
     return (
         <section className='publish'>
@@ -157,46 +147,40 @@ export const PublishColorPicker = () => {
                         </p>
                     </div>            
                 </div>
-            ) /* : colorSeleccionado? (
+            ) : colorSeleccionado ? (
                 <div className="h-[375px] w-[375px] mt-6 p-4" style={{backgroundColor: colorSeleccionado}}>
-                    <div 
-                        className="w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center" 
-                        style={{ color: colorSeleccionadoTexto }}>
-                        {write && ( 
-                            <textarea name="" id="" className="w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center"></textarea>
-                        )}
-                    </div>
-                </div>
-                
-            ) */ : colorSeleccionado ? (
-                <div className="h-[375px] w-[375px] mt-6 p-4" style={{backgroundColor: colorSeleccionado}}>
-                    <div  className="w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center" >
-                    <textarea 
-                            name="" 
-                            id="" 
-                            className="w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center"
-                            style={{ color: colorSeleccionadoTexto }}
-                            disabled={!write}
-                            ref={inputRef}
+                    <div  className="w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center grid items-center" >
+                        <textarea 
+                                name="" 
+                                id="" 
+                                className={`w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange}`}
+                                style={{ color: colorSeleccionadoTexto }}
+                                disabled={!write}
+                                onChange={() => {
+                                inputRef.current.style.height = 'auto'
+                                inputRef.current.style.height = (inputRef.current.scrollHeight) + 'px';
+                                }}
+                                ref={inputRef}
                         ></textarea>
                     </div>
-                    
                 </div>
-            ) /* : picDone ? (
-                <div className="h-[375px] w-[375px] mt-6">
-                    <img src={picDone} alt="Foto capturada" className="w-full h-full object-cover" />
-                </div>
-            )  */
+            ) 
             : picDone ? (
-                <div className="relative h-[375px] w-[375px] mt-6">
-                    <img src={picDone} alt="Foto capturada" className="w-full h-full object-cover" />
-                    <textarea 
-                        name="" 
-                        id="" 
-                        className="absolute top-0 left-0 w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center"
-                        style={{ color: colorSeleccionadoTexto }}
-                        ref={inputRef}
-                    ></textarea>                    
+                <div className="relative h-[375px] w-[375px] mt-6 ">
+                    <div className="w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center grid items-center" >
+                        <img src={picDone} alt="Foto capturada" className="w-full h-full object-cover" />
+                        <textarea 
+                            name="" 
+                            id="" 
+                            className="absolute w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden text-center resize-none"
+                            style={{ color: colorSeleccionadoTexto }}
+                            onChange={() => {
+                                inputRef.current.style.height = 'auto'
+                                inputRef.current.style.height = (inputRef.current.scrollHeight) + 'px';
+                            }}
+                            ref={inputRef}
+                        ></textarea>
+                    </div>                    
                 </div>
             ) 
            : videoRender ? (
@@ -226,25 +210,19 @@ export const PublishColorPicker = () => {
                     
                 </button>
                 <canvas className="hidden" ref={pic}></canvas>
-                {/* <img src="" alt="" className="hidden w-52 h-52" ref={imageR}/> */}
-                {/* <video className="mostrar-video w-52 h-52" autoPlay ref={videoRef}></video> */}
+                
                 
                 
                 <ColorPicker sendClean={handleColorPickerClick} onColorChange={manejarCambioColor} />
                 
                 {colorSeleccionado || picDone ? (
-                    <TextButton readyToWrite={handleWrite} textColorSelected={manejarCambioColorTexto} />
+                    <TextButton fontChange={fontChange} handleFontChange={handleFontChange} handleChangeAlign={handleChangeAlign} changeAlign={changeAlign} crearRef={focus} crearRef1={focus} crearRef2={focus} readyToWrite={handleWrite} textColorSelected={manejarCambioColorTexto} />
                 ) : (
                     <button className="text text-custom-gray border border-gray-300 bg-custom-gray-20 shadow-md rounded-[6px] p-3">
                         <PiTextT className="h-[24px] w-[24px]" />
                     </button>
                 )}
-                {/* {picDone?
-                    <TextButton readyToWrite={handleWrite} textColorSelected={manejarCambioColorTexto}/> :
-                    <button className="text text-custom-gray border border-gray-300 bg-custom-gray-20 shadow-md rounded-[6px] p-3">
-                        <PiTextT className="h-[24px] w-[24px]"/>
-                    </button>
-                } */}
+                
             </div>
             
             <div>

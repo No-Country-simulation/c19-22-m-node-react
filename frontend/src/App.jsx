@@ -16,6 +16,7 @@ import { Followers } from './components/notifications/Followers';
 import { Find } from './components/find/Find';
 import { Hashtags } from './components/find/Hashtags';
 import { Accounts } from './components/find/Accounts';
+import { ResultsGrid } from './components/find/ResultsGrid';
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
 
           <Route path="/find" element={ 
               <div className='min-h-screen flex flex-col'>
-                
+                <Header/>
                 <Find/>
                 <Navbar/>
               </div> }/>
@@ -56,6 +57,12 @@ function App() {
                 <Hashtags/>
                 <Navbar/>
               </div> }/>
+          <Route path="/results" element={ 
+              <div className='min-h-screen flex flex-col'>
+                <Header/>
+                <ResultsGrid/>
+                <Navbar/>
+              </div> }/> 
           <Route path="/profile" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>

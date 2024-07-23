@@ -25,6 +25,15 @@ export default {
       borderWidth: {
         '4': '4px',
       },
+      fontFamily: {
+        montserrat: ['Montserrat', 'sans-serif'],
+        playfair: ['Playfair Display', 'serif'],
+        oswald: ['Oswald', 'sans-serif'],
+        dancing: ['Dancing Script', 'cursive'],
+        bitter: ['Bitter', 'serif'],
+       
+        
+      },
     },
   },
   plugins: [],
