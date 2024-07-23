@@ -1,29 +1,31 @@
-import AppDataSource from '../config/db';
-import { Post } from '../models/post.model';
-import { uploadImg } from '../services/uploadImage';
+import { PostService } from '../services/postService.js';
 
-const createPost = async (req, res) => {
+const createPost = async (req, res, next) => {
 	const userId = Number(req.userId);
 	const data = req.body;
 	const { img } = req.files;
 	try {
-		const resImg = await uploadImg(img);
-		const postRepository = AppDataSource.getRepository(Post);
-		const item = postRepository.create({
-			...data,
-			...resImg,
-			user: { id: userId },
-		});
-
-		await postRepository.save(item);
-
-		res.status(201).json({ ok: true, message: 'post create' });
+		const response = await PostService.create(userId, data, img);
+		res.status(201).json(response);
 	} catch (error) {
-		console.log(error);
-		res.status(500).json({ msg: 'Error server' });
+		error.statusCode = 500;
+		next(error);
+	}
+};
+
+const getPosts = async (req, res, next) => {
+	const userId = Number(req.userId);
+	const { page = 1, size = 10 } = req.query;
+	try {
+		const response = await PostService.getAll(userId, page, size);
+		res.status(201).json(response);
+	} catch (error) {
+		error.statusCode = 500;
+		next(error);
 	}
 };
 
 export const PostController = {
 	createPost,
+	getPosts,
 };

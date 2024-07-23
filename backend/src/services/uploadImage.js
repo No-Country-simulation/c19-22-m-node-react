@@ -1,4 +1,4 @@
-import cloudinary from '../config/cloudinary';
+import cloudinary from '../config/cloudinary.js';
 import 'dotenv/config';
 
 const extensionesValidas = ['png', 'jpg', 'jpeg'];
@@ -17,6 +17,7 @@ export const uploadImg = async (img) => {
 			upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
 		});
 		// await cloudinary.api.delete_all_resources();
+		console.log(upload);
 		return { imageUrl: upload.url, imageId: upload.public_id };
 	} catch (e) {
 		throw new Error(e);
