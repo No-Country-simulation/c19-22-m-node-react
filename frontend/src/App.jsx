@@ -14,9 +14,10 @@ import { PublishColorPicker } from './components/publishColorPicker/PublishColor
 import { Comments } from './components/notifications/Comments';
 import { Followers } from './components/notifications/Followers';
 import { Find } from './components/find/Find';
-import { Hashtags } from './components/find/Hashtags';
-import { Accounts } from './components/find/Accounts';
-import { ResultsGrid } from './components/find/ResultsGrid';
+import { TagGrid } from './components/find/TagGrid';
+import { FindMockeado } from './components/find/FindMockeado';
+import { PostFind } from './components/postFind/PostFind';
+
 
 function App() {
   return (
@@ -40,65 +41,72 @@ function App() {
               </div> }/>
 
           <Route path="/find" element={ 
+              <div className='min-h-screen flex flex-col'>                
+                <FindMockeado/>
+                <Navbar/>
+              </div> }/>
+
+          <Route path="/find/account/:id" element={ 
+              <div className='min-h-screen flex flex-col'>                
+                {/* <Accounts/> */}
+                <Navbar/>
+              </div> }/>
+
+          <Route path="/find/tag/:tagName" element={ 
+              <div className='min-h-screen flex flex-col'> 
+                <Header/>               
+                <TagGrid/>
+                <Navbar/>
+              </div> }/>
+          <Route path="/post/:postId" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
-                <Find/>
+                <PostFind/>
                 <Navbar/>
               </div> }/>
-          <Route path="/accounts" element={ 
-              <div className='min-h-screen flex flex-col'>
-                
-                <Accounts/>
-                <Navbar/>
-              </div> }/>
-          <Route path="/hashtags" element={ 
-              <div className='min-h-screen flex flex-col'>
-                
-                <Hashtags/>
-                <Navbar/>
-              </div> }/>
-          <Route path="/results" element={ 
-              <div className='min-h-screen flex flex-col'>
-                <Header/>
-                <ResultsGrid/>
-                <Navbar/>
-              </div> }/> 
+
           <Route path="/profile" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <Profile/>
                 <Navbar/>
               </div> }/> 
+
           <Route path="/publish" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <PublishColorPicker/>
                 <Navbar/>
               </div> }/>
+
           <Route path="/publishpic" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <PublishPic/>
                 <Navbar/>
               </div> }/>
+
           <Route path="/publish-color-picker" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <PublishColorPicker/>
                 <Navbar/>
               </div> }/>
+
           <Route path="/notifications" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <Notifications/>
                 <Navbar/>
               </div> }/>
+
           <Route path="/comments" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <Comments/>
                 <Navbar/>
               </div> }/>
+
           <Route path="/followers" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>

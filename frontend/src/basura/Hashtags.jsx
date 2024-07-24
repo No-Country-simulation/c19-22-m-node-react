@@ -19,11 +19,18 @@ export const Hashtags = () => {
   
     const redirectToAccounts = () => {
         navigate('/accounts');
-    };
-  
+    };  
     const redirectToHashtags = () => {
       navigate('/hashtags');
     };
+
+    const redirectToResults = () => {
+        navigate('/results');
+      };
+
+
+
+
 
     const inputRef = useRef(null)
     
@@ -67,7 +74,9 @@ export const Hashtags = () => {
             <div className="fila-usuario1 py-2 px-4 flex justify-between items-center">
                 <div className="profilepic-nombre flex gap-2 items-center">                    
                     <div className="w-[230px]">
-                        <p className="text-sm font-semibold">Acuarela</p>
+                        <button onClick={redirectToResults}>
+                            <p className="text-sm font-semibold">Acuarela</p>
+                        </button>                        
                         <p className="text-sm">20 mil publicaciones</p>
                     </div>                
                 </div>              
