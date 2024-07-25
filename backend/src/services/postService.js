@@ -1,6 +1,6 @@
 // import { ILike, Not } from 'typeorm';
 import PostDTO from '../dtos/post/PostDTO.js';
-import SearchPostDTO from '../dtos/post/SearchPostDto.js';
+import SearchPostDTO from '../dtos/post/SearchPostDTO.js';
 import { postRepository } from '../repositories/postRepository.js';
 import ResponseDTO from '../shared/dtos/ResponseDTO.js';
 import { uploadImg } from './uploadImage.js';
