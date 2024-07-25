@@ -15,8 +15,6 @@ export const Register = () => {
 
   const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(null);
 
-  const urlFer = "http://localhost:3000/api/v1/users/register";
-
   useEffect(() => {
     if (password != repeatP) {
       setErrorP(true);
@@ -38,7 +36,7 @@ export const Register = () => {
       setErrorP(false);
     }
 
-    fetch(urlFer, {
+    fetch("urlFer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,16 +44,17 @@ export const Register = () => {
       },
       body: JSON.stringify({
         name,
-        lastname: surname,
-        mail: email,
+        surname,
+        email,
         username,
         password,
+        repeatP,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         /* data.status */
-        console.log("registro exitoso", data);
+        console.log(data);
       })
       /* en el then vamos a capturar mensajes del servidor */
       /* Fer va a ponerle una propiedad a data para que si esa propiedad es true, yo voy a 
@@ -108,6 +107,7 @@ export const Register = () => {
             type="text"
             id="nombre"
             name="nombre"
+            /*value={name}*/
             placeholder="María"
             className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primario focus:border-transparent border-gray-300"
             required
@@ -230,3 +230,4 @@ export const Register = () => {
     </section>
   );
 };
+
