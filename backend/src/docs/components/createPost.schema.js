@@ -3,35 +3,31 @@ export const createPostSchema = {
 	properties: {
 		content: {
 			type: 'string',
-			example: 'Villa con Vista al Océano',
+			example: 'Post sobre dibujo en lienzo',
 		},
 		backgroundColor: {
 			type: 'string',
-			example: 'Argentina',
+			example: '#232323',
 		},
 		textColor: {
 			type: 'string',
-			example: 'Buenos Aires',
+			example: '#0A0A0A',
 		},
 		fontSize: {
 			type: 'integer',
-			example: 1,
+			example: 14,
 		},
 		fontFamily: {
 			type: 'string',
-			example: 'Avenida las Flores N°550',
+			example: 'sans',
+		},
+		tagId: {
+			type: 'int',
+			example: 1,
 		},
 		img: {
 			type: 'string',
 			format: 'binary',
 		},
 	},
-	required: [
-		'content',
-		'backgroundColor',
-		'textColor',
-		'fontSize',
-		'fontFamily',
-		'img',
-	],
 };

@@ -2,25 +2,16 @@ export const getPost = {
 	get: {
 		security: [{ bearerAuth: [] }],
 		tags: ['Post'],
-		description: 'get post - in progress',
+		description: 'get post - done',
 		parameters: [
 			{
-				name: 'size',
-				in: 'query',
-				schema: {
-					type: 'integer',
-					example: 10,
-				},
-				description: 'page size, value default: 10',
-			},
-			{
-				name: 'page',
-				in: 'query',
+				name: 'id',
+				in: 'path',
 				schema: {
 					type: 'integer',
 					example: 1,
 				},
-				description: 'page number, value default: 1',
+				description: 'post id',
 			},
 		],
 		responses: {
@@ -29,24 +20,35 @@ export const getPost = {
 				content: {
 					'application/json': {
 						schema: {
-							type: 'object',
-							properties: {
-								status: {
-									type: 'integer',
-									example: 0,
+							allOf: [
+								{
+									$ref: '#/components/schemas/response',
 								},
-								message: {
-									type: 'string',
-									example: 'Post obtained',
-								},
-								data: {
-									type: 'array',
-									items: {
-										$ref: '#/components/schemas/getPost',
+								{
+									properties: {
+										data: {
+											$ref: '#/components/schemas/getPost',
+										},
 									},
 								},
-							},
+							],
 						},
+						// {
+						// 	type: 'object',
+						// 	properties: {
+						// 		status: {
+						// 			type: 'integer',
+						// 			example: 0,
+						// 		},
+						// 		message: {
+						// 			type: 'string',
+						// 			example: 'Post obtained',
+						// 		},
+						// 		data: {
+						// 			$ref: '#/components/schemas/getPost',
+						// 		},
+						// 	},
+						// },
 					},
 				},
 			},

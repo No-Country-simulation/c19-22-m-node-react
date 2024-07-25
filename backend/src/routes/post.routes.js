@@ -6,5 +6,6 @@ const router = Router();
 
 router.post('/', verifyToken, PostController.createPost);
 router.get('/', verifyToken, PostController.getPosts);
+router.get('/:id', verifyToken, PostController.getPost);
 
 export default router;
