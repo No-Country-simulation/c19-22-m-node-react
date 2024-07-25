@@ -162,7 +162,7 @@ export const Login = () => {
         <p className="text-center text-sm">
           No tienes una cuenta?{" "}
           <a
-            href="#"
+            href="/register"
             className="text-secundario font-semibold">
             REGISTRATE
           </a>
