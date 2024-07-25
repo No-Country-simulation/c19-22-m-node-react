@@ -10,7 +10,7 @@ import { Profile } from './components/profile/Profile';
 import { Notifications } from './components/notifications/Notifications';
 import { Login } from './components/login/Login';
 import { PublishPic } from './components/publishPic.jsx/PublishPic';
-import { PublishColorPicker } from './components/publishColorPicker/PublishColorPicker';
+import { Publish } from './components/publish/Publish';
 import { Comments } from './components/notifications/Comments';
 import { Followers } from './components/notifications/Followers';
 import { Find } from './components/find/Find';
@@ -75,7 +75,7 @@ function App() {
           <Route path="/publish" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
-                <PublishColorPicker/>
+                <Publish/>
                 <Navbar/>
               </div> }/>
 
@@ -85,13 +85,7 @@ function App() {
                 <PublishPic/>
                 <Navbar/>
               </div> }/>
-
-          <Route path="/publish-color-picker" element={ 
-              <div className='min-h-screen flex flex-col'>
-                <Header/>
-                <PublishColorPicker/>
-                <Navbar/>
-              </div> }/>
+          
 
           <Route path="/notifications" element={ 
               <div className='min-h-screen flex flex-col'>
