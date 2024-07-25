@@ -40,5 +40,11 @@ export const User = new EntitySchema({
 			},
 			cascade: true,
 		},
+		posts: {
+			type: 'one-to-many',
+			target: 'Post',
+			cascade: true,
+			inverseSide: 'user',
+		},
 	},
 });
