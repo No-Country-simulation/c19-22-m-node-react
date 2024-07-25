@@ -28,27 +28,34 @@ export const PublishColorPicker = () => {
     const pic = useRef()
     const imageR = useRef()
 
+
+
+    //FUNCION PARA MANEJAR EL CAMBIO DE COLOR DE FONDO
     const manejarCambioColor = (color) => {
         setColorSeleccionado(color);
         setPicDone(null);
         setPantallaLimpia(false);
     };
 
-
+    //FUNCION PARA MANEJAR EL CAMBIO DE COLOR DE TEXTO
     const manejarCambioColorTexto = (color) => {
         setColorSeleccionadoTexto(color);
         inputRef.current.focus()
     };
 
+    //FUNCION PARA PERMITIR O NO ESCRIBIR SOBRE LA FOTO O COLOR DE FONDO SI ESTA ABIERTO O NO EL EDITOR DE TEXTO
     const handleWrite = (bool) => {
         setWrite(bool);
     };
 
+    //FUNCION PARA HACER FOCO EN EL TEXTAREA CUANDO SE ABRE EL EDITOR DE TEXTO
     const focus = () => {
         inputRef.current.focus()
     }
     
 
+
+    //FUNCIONALIDAD PARA TOMAR FOTO CON LA WEBCAM
     const [currentStream, setCurrentStream] = useState(null);
 
     const abrirWebcam = async () => {
@@ -81,7 +88,6 @@ export const PublishColorPicker = () => {
         }
     };
 
-
     const tomarFoto = () => {
         if (videoRef.current) {
             pic.current.width = videoRef.current.videoWidth;
@@ -100,10 +106,7 @@ export const PublishColorPicker = () => {
                 currentStream.getTracks().forEach(track => track.stop());
             }
         }
-    };
-
-    
-
+    };   
 
     useEffect(() => {
         return () => {
@@ -113,12 +116,8 @@ export const PublishColorPicker = () => {
         };
     }, [currentStream]);
 
-
-
     const inputRef = useRef(null)
     
-
-
     useEffect(() => {
         if (write && inputRef.current) {
             inputRef.current.focus()
@@ -127,13 +126,11 @@ export const PublishColorPicker = () => {
 
 
 
-
+    //FUNCION PARA LIMPIAR LA PANTALLA CUANDO SE TOCA EL SELECCIONADOR DE COLOR DE FONDO
     const handleColorPickerClick = (bool) => {
         setPantallaLimpia(bool)
     };
 
-    /* console.log('changeAlign',changeAlign)
-    console.log('fontChange',fontChange) */
     
 
 
@@ -227,9 +224,7 @@ export const PublishColorPicker = () => {
             
             <div>
                 <h4 className="text-center text-custom-gray-80 text-sm p-4">CONTINUAR</h4>
-                {/* {write && ( 
-                            <h1>hola</h1>
-                        )} */}
+                
             </div>
         </section>
     )
