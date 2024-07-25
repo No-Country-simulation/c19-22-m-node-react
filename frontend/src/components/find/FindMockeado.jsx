@@ -70,7 +70,7 @@ export const FindMockeado = () => {
 
 
 
-  //cambio de pesta;a
+  //cambio de pestaña
   const handleAccountTab = () => {
     setAccountOrTag('accounts');
   };  
@@ -150,12 +150,12 @@ export const FindMockeado = () => {
       <div className="bg-custom-gray-10 flex items-start gap-10 px-4"></div>
 
       <div className="bg-custom-gray-10 flex items-center justify-center gap-10 px-4 pb-1 shadow-up-dark-md">
-        <div className={`border-b-4 pt-2 pb-1 border-primario w-[188px] flex justify-center ${accountOrTag === 'accounts' ? 'border-primario' : 'border-none'}`}>
+        <div className={`border-b-4 pt-2 pb-1 w-[188px] flex justify-center ${accountOrTag === 'accounts' ? 'border-primario' : 'border-none'}`}>
           <button onClick={handleAccountTab}>
             <h4 className="font-semibold text-center">Cuentas</h4>
           </button>
         </div>
-        <div className={`border-b-4 pt-2 pb-1 border-primario w-[188px] flex justify-center ${accountOrTag === 'tags' ? 'border-primario' : 'border-none'}`}>
+        <div className={`border-b-4 pt-2 pb-1 w-[188px] flex justify-center ${accountOrTag === 'tags' ? 'border-primario' : 'border-none'}`}>
           <button onClick={handleHashtagTab}>
             <h4 className="font-semibold text-center">Etiquetas</h4>
           </button>

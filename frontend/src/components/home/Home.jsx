@@ -26,9 +26,7 @@ export const Home = () => {
                     <p className="text-xxs leading-custom"><strong className="mr-1">tolaba.abel</strong>Hermosa combinación! De qué marca son?</p>
                 </div>
                 
-            </div>
-            
-            
+            </div>            
         </section>
     )
   }

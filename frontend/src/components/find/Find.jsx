@@ -63,7 +63,7 @@ export const Find = () => {
     // Función de búsqueda DE ACCOUNTS con debounce
     const fetchAccounts = useCallback(
         debounce((searchQuery) => {
-        fetch(`/api/tags?search=${searchQuery}`)
+        fetch(`/api/account?search=${searchQuery}`)
             .then((response) => response.json())
             .then((data) => setTags(data))
             .catch((error) => console.error('Error fetching tags:', error));

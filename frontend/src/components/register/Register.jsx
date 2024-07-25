@@ -104,6 +104,7 @@ function enviar (e) {
                         type="text"
                         id="nombre"
                         name="nombre"
+                        /* value={name} */
                         placeholder="María"
                         className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primario focus:border-transparent border-gray-300"
                         required
