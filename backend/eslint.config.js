@@ -5,5 +5,10 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 export default [
   {languageOptions: { globals: globals.node }},
   pluginJs.configs.recommended,
-  eslintPluginPrettierRecommended
+  eslintPluginPrettierRecommended,
+  {
+    rules: {
+      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+    }
+  }
 ];

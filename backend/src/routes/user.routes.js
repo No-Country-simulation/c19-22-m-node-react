@@ -24,5 +24,6 @@ router.post('/register', (req, res, next) => {
 	console.log('Received register request');
 	return UserController.register(req, res, next);
 });
+router.get('/users', UserController.getAllUsers);
 
 export default router;
