@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { FriendRequest } from '../models/friendRequest.model.js';
 import { Post } from '../models/post.model.js';
 import { Tag } from '../models/tag.model.js';
+import { Notification } from '../models/notifications.model.js';
 
 const AppDataSource = new DataSource({
 	type: 'postgres',
@@ -14,7 +15,7 @@ const AppDataSource = new DataSource({
 	database: process.env.DB_NAME,
 	synchronize: true,
 	logging: true,
-	entities: [User, FriendRequest, Post, Tag],
+	entities: [User, FriendRequest, Post, Tag, Notification],
 	migrations: [],
 	subscribers: [],
 });

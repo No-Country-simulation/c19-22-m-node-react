@@ -7,10 +7,13 @@ import swaggerUI from 'swagger-ui-express';
 import swaggerConfig from './src/docs/index.js';
 import fileUpload from 'express-fileupload';
 import { handleError } from './src/middleware/handleError.js';
+import 'dotenv/config';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -20,6 +23,10 @@ app.use(
 		createParentPath: true,
 	}),
 );
+
+app.get('/', (req, res) => {
+	res.send('Hello World!');
+});
 
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/posts', postRoutes);
