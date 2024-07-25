@@ -24,6 +24,60 @@ const register = async (req, res) => {
 			return res.status(400).json({ msg: 'mail already exists' });
 		}
 
+		if (password.length < 6) {
+			return res
+				.status(400)
+				.json({ msg: 'Password must be at least 6 characters long' });
+		}
+
+		if (username.length < 3) {
+			return res
+				.status(400)
+				.json({ msg: 'Username must be at least 3 characters long' });
+		}
+
+		if (name.length < 3) {
+			return res
+				.status(400)
+				.json({ msg: 'Name must be at least 3 characters long' });
+		}
+
+		if (lastname.length < 3) {
+			return res
+				.status(400)
+				.json({ msg: 'Lastname must be at least 3 characters long' });
+		}
+
+		if (mail.length < 3) {
+			return res
+				.status(400)
+				.json({ msg: 'Mail must be at least 3 characters long' });
+		}
+
+		if (mail.includes(' ')) {
+			return res.status(400).json({ msg: 'Mail must be valid' });
+		}
+
+		if (!mail.includes('@')) {
+			return res.status(400).json({ msg: 'Mail must be valid' });
+		}
+
+		if (!mail.includes('.')) {
+			return res.status(400).json({ msg: 'Mail must be valid' });
+		}
+
+		if (username.split(' ').length > 1) {
+			return res.status(400).json({ msg: 'Username must be valid' });
+		}
+
+		if (name.split(' ').length > 1) {
+			return res.status(400).json({ msg: 'Name must be valid' });
+		}
+
+		if (lastname.split(' ').length > 1) {
+			return res.status(400).json({ msg: 'Lastname must be valid' });
+		}
+
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -177,6 +231,17 @@ const rejectFriendRequest = async (req, res) => {
 	}
 };
 
+const getAllUsers = async (req, res) => {
+	try {
+		const userRepository = AppDataSource.getRepository(User);
+		const users = await userRepository.find();
+		return res.json(users);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Server error' });
+	}
+};
+
 export const UserController = {
 	register,
 	login,
@@ -184,4 +249,5 @@ export const UserController = {
 	sendFriendRequest,
 	acceptFriendRequest,
 	rejectFriendRequest,
+	getAllUsers,
 };

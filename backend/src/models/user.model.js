@@ -12,6 +12,10 @@ export const User = new EntitySchema({
 		name: {
 			type: 'varchar',
 		},
+		profilePic: {
+			type: 'varchar',
+			default: '../utils/images.jpg',
+		},
 		lastname: {
 			type: 'varchar',
 		},
@@ -35,6 +39,12 @@ export const User = new EntitySchema({
 				inverseJoinColumn: { name: 'friendId', referencedColumnName: 'id' },
 			},
 			cascade: true,
+		},
+		posts: {
+			type: 'one-to-many',
+			target: 'Post',
+			cascade: true,
+			inverseSide: 'user',
 		},
 	},
 });

@@ -22,23 +22,37 @@ import { PostFind } from './components/postFind/PostFind';
 function App() {
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-          <Route path="/" element={ 
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/register"
+            element={
               <div>
-                <Register/>
-              </div> }/>
-            {<Route path="/login" element={ 
-              <div>
-                <Login/>
-              </div> }/>}
+                <Register />
+              </div>
+            }
+          />
+          {
+            <Route
+              path="/login"
+              element={
+                <div>
+                  <Login />
+                </div>
+              }
+            />
+          }
 
-          <Route path="/home" element={ 
+          <Route
+            path="/"
+            element={
               <div>
-                <Header/>
-                <Home/>
-                <Navbar/>
-              </div> }/>
+                <Header />
+                <Home />
+                <Navbar />
+              </div>
+            }
+          />
 
           <Route path="/find" element={ 
               <div className='min-h-screen flex flex-col'>                
