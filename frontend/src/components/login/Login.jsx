@@ -1,10 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import logo from "../../assets/logoSVG.svg";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const urlFer = "http://localhost:3000/api/v1/users/login";
   /* const [errorFetch, setErrorFetch] = useState(null) */
@@ -43,20 +47,28 @@ export const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        /* data.status */
-        console.log(data);
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          navigate("/");
+        } else {
+          // Manejo de otros casos si el token no está presente pero la solicitud fue exitosa
+          setErrorMessage(
+            "No se pudo iniciar sesión con las credenciales proporcionadas."
+          );
+        }
       })
-      /* en el then vamos a capturar mensajes del servidor */
-      /* Fer va a ponerle una propiedad a data para que si esa propiedad es true, yo voy a 
+      .catch((error) => {
+        setErrorMessage(error.message || "Error al conectar con el servidor");
+      });
+  }
+  /* en el then vamos a capturar mensajes del servidor */
+  /* Fer va a ponerle una propiedad a data para que si esa propiedad es true, yo voy a 
       hacer un condicional, de que si es true se setee por ejemplo el estado de usernameAlreadyExists en true
       y en el return del componente voy a hacer un renderizado condicional como con los otros mensajes */
 
-      .catch((error) => {
-        console.log(error);
-        // setErrorFetch(true)
-      });
-    /* el catch lo vamos a usar solo para atrapar errores del servidor */
-  }
+  // setErrorFetch(true)
+
+  /* el catch lo vamos a usar solo para atrapar errores del servidor */
 
   /* if (errorFetch) {
         return (
@@ -145,13 +157,16 @@ export const Login = () => {
               </button>
             </div>
           </div>
+          {errorMessage && (
+            <div className="mb-4 text-center text-red-600">{errorMessage}</div>
+          )}
 
           <button
             onClick={enviar}
             type="submit"
             id="registrarme"
             className={`w-full py-3 text-lg font-semibold px-4 rounded-lg hover:bg-custom-violet-hover focus:outline-none focus:bg-custom-violet-hover ${
-              name && password
+              username && password
                 ? "bg-primario text-white"
                 : "bg-custom-gray-20 text-custom-gray-80"
             }`}>
