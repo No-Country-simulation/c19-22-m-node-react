@@ -9,7 +9,7 @@ import { Header } from './components/header/Header';
 import { Profile } from './components/profile/Profile';
 import { Notifications } from './components/notifications/Notifications';
 import { Login } from './components/login/Login';
-import { PublishPic } from './components/publishPic.jsx/PublishPic';
+
 import { Publish } from './components/publish/Publish';
 import { Comments } from './components/notifications/Comments';
 import { Followers } from './components/notifications/Followers';
@@ -56,7 +56,7 @@ function App() {
 
           <Route path="/find" element={ 
               <div className='min-h-screen flex flex-col'>                
-                <FindMockeado/>
+                <Find/>
                 <Navbar/>
               </div> }/>
 
@@ -93,15 +93,9 @@ function App() {
                 <Navbar/>
               </div> }/>
 
-          <Route path="/publishpic" element={ 
-              <div className='min-h-screen flex flex-col'>
-                <Header/>
-                <PublishPic/>
-                <Navbar/>
-              </div> }/>
-          
+                   
 
-          <Route path="/notifications" element={ 
+          {/* <Route path="/notifications" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <Notifications/>
@@ -120,7 +114,7 @@ function App() {
                 <Header/>
                 <Followers/>
                 <Navbar/>
-              </div> }/>   
+              </div> }/>    */}
       </Routes>
     </BrowserRouter>      
     </>

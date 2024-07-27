@@ -6,7 +6,7 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const urlFer = "http://localhost:3000/api/v1/users/login";
+  const urlFer = "http://viaduct.proxy.rlwy.net:25260/api/v1/users/login";
   /* const [errorFetch, setErrorFetch] = useState(null) */
 
   /* const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(null) */
@@ -45,17 +45,15 @@ export const Login = () => {
       .then((data) => {
         /* data.status */
         console.log(data);
-      })
-      /* en el then vamos a capturar mensajes del servidor */
-      /* Fer va a ponerle una propiedad a data para que si esa propiedad es true, yo voy a 
-      hacer un condicional, de que si es true se setee por ejemplo el estado de usernameAlreadyExists en true
-      y en el return del componente voy a hacer un renderizado condicional como con los otros mensajes */
-
+        const token = data.token
+        localStorage.setItem('token', token)
+      }) 
       .catch((error) => {
         console.log(error);
         // setErrorFetch(true)
       });
-    /* el catch lo vamos a usar solo para atrapar errores del servidor */
+   
+
   }
 
   /* if (errorFetch) {
@@ -151,7 +149,7 @@ export const Login = () => {
             type="submit"
             id="registrarme"
             className={`w-full py-3 text-lg font-semibold px-4 rounded-lg hover:bg-custom-violet-hover focus:outline-none focus:bg-custom-violet-hover ${
-              name && password
+              username && password
                 ? "bg-primario text-white"
                 : "bg-custom-gray-20 text-custom-gray-80"
             }`}>

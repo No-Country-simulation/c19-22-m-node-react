@@ -106,6 +106,9 @@ export const FindMockeado = () => {
 
 
   //ACCOUNTS
+
+
+  
   const fetchAccounts = useCallback(
     debounce((searchQuery) => {
       // Simular la búsqueda de cuentas
@@ -113,6 +116,8 @@ export const FindMockeado = () => {
       setAccounts(filteredAccounts);
     }, 300), []
   );
+
+
 
   useEffect(() => {
     if (query && accountOrTag === 'accounts') {
@@ -132,6 +137,7 @@ export const FindMockeado = () => {
   const handleTagClick = (tag) => {
     navigate(`/find/tag/${tag.name}`);
   };
+
 
 
 

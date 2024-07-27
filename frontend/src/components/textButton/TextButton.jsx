@@ -8,11 +8,12 @@ import { CiTextAlignCenter } from "react-icons/ci";
 import { RiFontSize } from "react-icons/ri";
 import TextAlign from '../textAlign/TextAlign';
 import TextFont from '../textFont/TextFont';
+import TextSize from '../textSize/TextSize';
 
 
 
 
-const TextButton = ({textColorSelected, readyToWrite, crearRef, crearRef1, crearRef2, handleChangeAlign, changeAlign, handleFontChange, fontChange}) => {
+const TextButton = ({textColorSelected, readyToWrite, crearRef, crearRef1, crearRef2, handleChangeAlign, changeAlign, handleFontChange, fontChange, handleChangeSize, changeSize}) => {
     const [showTEditor, setShowTEditor] = useState(false)
     
 
@@ -21,10 +22,10 @@ const TextButton = ({textColorSelected, readyToWrite, crearRef, crearRef1, crear
     readyToWrite(true);
 };
 
-const handleCloseT = () => {
-    setShowTEditor(false);
-    readyToWrite(false);
-};
+    const handleCloseT = () => {
+        setShowTEditor(false);
+        readyToWrite(false);
+    };
 
     const [colorSeleccionado, setColorSeleccionado] = useState('');
 
@@ -71,6 +72,8 @@ const handleCloseT = () => {
                             <ColorPicker paraPasarRef={crearRef} sendClean={() => {}} onColorChange={manejarCambioColor}/>
 
                             <TextFont paraPasarRef={crearRef2} handleFontChange={handleFontChange} fontChange={fontChange}/>
+
+                            <TextSize handleChangeSize={handleChangeSize}  changeSize={changeSize}/>
                             
                             
                         </div>
