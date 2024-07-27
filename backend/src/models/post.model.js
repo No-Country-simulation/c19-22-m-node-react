@@ -40,10 +40,6 @@ export const Post = new EntitySchema({
 			type: 'varchar',
 			nullable: true,
 		},
-		likes: {
-			type: 'int',
-			default: 0,
-		},
 	},
 	relations: {
 		user: {
@@ -63,6 +59,17 @@ export const Post = new EntitySchema({
 				inverseJoinColumn: { name: 'tagsId', referencedColumnName: 'id' },
 			},
 			inverseSide: 'posts',
+		},
+		comments: {
+			type: 'one-to-many',
+			target: 'Comment',
+			cascade: true,
+			inverseSide: 'post',
+		},
+		likes: {
+			type: 'one-to-many',
+			target: 'Like',
+			inverseSide: 'post',
 		},
 	},
 });

@@ -7,5 +7,9 @@ const router = Router();
 router.post('/', verifyToken, PostController.createPost);
 router.get('/', verifyToken, PostController.getPosts);
 router.get('/:id', verifyToken, PostController.getPost);
+router.post('/comment/:postId', verifyToken, PostController.createComment);
+router.delete('/comment/:commentId', verifyToken, PostController.deleteComment);
+router.post('/like/:postId', verifyToken, PostController.createLike);
+router.delete('/like/:postId', verifyToken, PostController.deleteLike);
 
 export default router;

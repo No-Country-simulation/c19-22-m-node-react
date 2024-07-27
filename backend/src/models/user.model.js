@@ -46,5 +46,16 @@ export const User = new EntitySchema({
 			cascade: true,
 			inverseSide: 'user',
 		},
+		comments: {
+			type: 'one-to-many',
+			target: 'Comment',
+			cascade: true,
+			inverseSide: 'user',
+		},
+		likes: {
+			target: 'Like',
+			type: 'one-to-many',
+			inverseSide: 'user',
+		},
 	},
 });

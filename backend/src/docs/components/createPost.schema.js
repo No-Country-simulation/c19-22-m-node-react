@@ -21,9 +21,9 @@ export const createPostSchema = {
 			type: 'string',
 			example: 'sans',
 		},
-		tagId: {
-			type: 'int',
-			example: 1,
+		tags: {
+			type: 'string',
+			example: '1, 2, 3',
 		},
 		img: {
 			type: 'string',
