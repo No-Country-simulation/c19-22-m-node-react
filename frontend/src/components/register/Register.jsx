@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [name, setName] = useState(null);
@@ -8,6 +9,8 @@ export const Register = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [repeatP, setRepeatP] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const [errorP, setErrorP] = useState(null);
 
@@ -54,18 +57,24 @@ export const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        /* data.status */
-        console.log("registro exitoso", data);
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          navigate("/");
+        } else {
+          // Manejo de otros casos si el token no está presente pero la solicitud fue exitosa
+          setErrorMessage(
+            "No se pudo registrar con las credenciales proporcionadas..."
+          );
+        }
       })
-      /* en el then vamos a capturar mensajes del servidor */
-      /* Fer va a ponerle una propiedad a data para que si esa propiedad es true, yo voy a 
+      .catch((error) => {
+        setErrorMessage(error.message || "Error al conectar con el servidor");
+      });
+    /* en el then vamos a capturar mensajes del servidor */
+    /* Fer va a ponerle una propiedad a data para que si esa propiedad es true, yo voy a 
       hacer un condicional, de que si es true se setee por ejemplo el estado de usernameAlreadyExists en true
       y en el return del componente voy a hacer un renderizado condicional como con los otros mensajes */
 
-      .catch((error) => {
-        console.log(error);
-        setErrorFetch(true);
-      });
     /* el catch lo vamos a usar solo para atrapar errores del servidor */
   }
 
@@ -210,6 +219,9 @@ export const Register = () => {
               </p>
             ))}
         </div>
+        {errorMessage && (
+          <div className="mb-4 text-center text-red-600">{errorMessage}</div>
+        )}
         <button
           onClick={enviar}
           type="submit"
