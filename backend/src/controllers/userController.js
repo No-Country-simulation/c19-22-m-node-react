@@ -140,6 +140,7 @@ const profile = async (req, res) => {
 	try {
 		const user = await AppDataSource.getRepository(User).findOne({
 			where: { id: req.userId },
+			relations: ['posts'],
 		});
 		return res.json(user);
 	} catch (error) {
