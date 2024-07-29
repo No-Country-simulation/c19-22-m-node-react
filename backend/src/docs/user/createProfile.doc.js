@@ -1,11 +1,25 @@
-export const getPosts = {
-	get: {
+export const createProfile = {
+	post: {
+		tags: ['User'],
 		security: [{ bearerAuth: [] }],
-		tags: ['Post'],
-		description: 'get post - done',
+		description: 'Create profile - in progress',
+		requestBody: {
+			content: {
+				'multipart/form-data': {
+					schema: {
+						$ref: '#/components/schemas/createProfile',
+					},
+					encoding: {
+						profilePic: {
+							contentType: 'image/png, image/jpeg',
+						},
+					},
+				},
+			},
+		},
 		responses: {
 			200: {
-				description: 'Posts obtained',
+				description: 'Create profile',
 				content: {
 					'application/json': {
 						schema: {
@@ -17,13 +31,11 @@ export const getPosts = {
 								},
 								message: {
 									type: 'string',
-									example: 'Post obtained',
+									example: 'Profile Created',
 								},
 								data: {
-									type: 'array',
-									items: {
-										$ref: '#/components/schemas/getPosts',
-									},
+									type: 'object',
+									example: '{}',
 								},
 							},
 						},
@@ -31,7 +43,7 @@ export const getPosts = {
 				},
 			},
 			400: {
-				description: 'Error',
+				description: 'Data incorrect',
 				content: {
 					'application/json': {
 						schema: {
@@ -43,11 +55,11 @@ export const getPosts = {
 								},
 								message: {
 									type: 'string',
-									example: 'Error',
+									example: 'Data incorrect',
 								},
 								data: {
 									type: 'object',
-									example: '{}',
+									example: {},
 								},
 							},
 						},

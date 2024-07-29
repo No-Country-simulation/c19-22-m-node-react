@@ -1,11 +1,11 @@
-export const getPosts = {
+export const profile = {
 	get: {
+		tags: ['User'],
 		security: [{ bearerAuth: [] }],
-		tags: ['Post'],
-		description: 'get post - done',
+		description: 'Get profile - done',
 		responses: {
 			200: {
-				description: 'Posts obtained',
+				description: 'Get profile',
 				content: {
 					'application/json': {
 						schema: {
@@ -17,13 +17,11 @@ export const getPosts = {
 								},
 								message: {
 									type: 'string',
-									example: 'Post obtained',
+									example: 'Get profile',
 								},
 								data: {
-									type: 'array',
-									items: {
-										$ref: '#/components/schemas/getPosts',
-									},
+									type: 'object',
+									example: '{}',
 								},
 							},
 						},
@@ -31,7 +29,7 @@ export const getPosts = {
 				},
 			},
 			400: {
-				description: 'Error',
+				description: 'Data incorrect',
 				content: {
 					'application/json': {
 						schema: {
@@ -43,11 +41,11 @@ export const getPosts = {
 								},
 								message: {
 									type: 'string',
-									example: 'Error',
+									example: 'Data incorrect',
 								},
 								data: {
 									type: 'object',
-									example: '{}',
+									example: {},
 								},
 							},
 						},

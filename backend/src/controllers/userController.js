@@ -4,6 +4,7 @@ import AppDataSource from '../config/db.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import { uploadImg } from '../services/uploadImage.js';
 
 const register = async (req, res) => {
 	try {
@@ -147,6 +148,29 @@ const profile = async (req, res) => {
 	}
 };
 
+const editProfile = async (req, res) => {
+	try {
+		const userId = Number(req.userId);
+		const data = req.body;
+		const { profilePic } = req.files;
+		let resImg = { profilePic: null, imageId: null };
+		if (profilePic.mimetype !== 'text/plain')
+			resImg = await uploadImg(profilePic);
+
+		const profile = {
+			...data,
+			...resImg,
+		};
+
+		await AppDataSource.getRepository(User).update(userId, profile);
+
+		return res.json({ msg: 'Profile edited' });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Error server' });
+	}
+};
+
 const sendFriendRequest = async (req, res) => {
 	try {
 		const { senderId, receiverId } = req.body;
@@ -250,4 +274,5 @@ export const UserController = {
 	acceptFriendRequest,
 	rejectFriendRequest,
 	getAllUsers,
+	editProfile,
 };
