@@ -11,7 +11,7 @@ const create = async (id, data, img) => {
 	let resImg = { imageUrl: null, imageId: null };
 	let tags = [];
 	if (data.tags) tags = JSON.parse(`[${data.tags}]`);
-	if (img.mimetype !== 'text/plain') resImg = await uploadImg(img);
+	if (img && img.mimetype !== 'text/plain') resImg = await uploadImg(img);
 
 	const post = {
 		...data,

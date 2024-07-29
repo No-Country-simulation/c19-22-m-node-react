@@ -3,7 +3,7 @@ import { PostService } from '../services/postService.js';
 const createPost = async (req, res, next) => {
 	const userId = Number(req.userId);
 	const data = req.body;
-	const { img } = req.files;
+	const img = req.files?.img;
 	try {
 		const response = await PostService.create(userId, data, img);
 		res.status(201).json(response);
