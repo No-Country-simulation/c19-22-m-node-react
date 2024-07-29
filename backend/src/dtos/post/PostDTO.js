@@ -12,7 +12,7 @@ export default class PostDTO {
 		this.fontFamily = post.fontFamily;
 		this.fontAlign = post.fontAlign;
 		this.likes = post.likes.length;
-		this.description = post.content;
+		this.description = post.description;
 		this.comments = post.comments.map((comment) => ({
 			id: comment.id,
 			username: comment.user.username,
