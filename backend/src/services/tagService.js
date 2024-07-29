@@ -1,8 +1,9 @@
+import TagDTO from '../dtos/post/TagDTO.js';
 import SearchTagDTO from '../dtos/tag/SearchTagDTO.js';
 import { tagRepository } from '../repositories/tagRespository.js';
 import ResponseDTO from '../shared/dtos/ResponseDTO.js';
 
-const getAll = async (query = '') => {
+const searchTags = async (query = '') => {
 	const tags = await tagRepository
 		.createQueryBuilder('tag')
 		.leftJoinAndSelect('tag.posts', 'post')
@@ -19,6 +20,15 @@ const getAll = async (query = '') => {
 	return ResponseDTO.success('Tags obtained', tagsDTO);
 };
 
+const getAll = async () => {
+	const tags = await tagRepository.find();
+
+	const tagsDTO = tags.map((tag) => new TagDTO(tag));
+
+	return ResponseDTO.success('Tags obtained', tagsDTO);
+};
+
 export const TagService = {
+	searchTags,
 	getAll,
 };

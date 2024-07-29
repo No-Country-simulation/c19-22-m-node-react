@@ -1,11 +1,11 @@
-export const getPosts = {
+export const getAllTags = {
 	get: {
-		security: [{ bearerAuth: [] }],
-		tags: ['Post'],
-		description: 'get post - done',
+		// security: [{ bearerAuth: [] }],
+		tags: ['Tag'],
+		description: 'get all tags - done',
 		responses: {
 			200: {
-				description: 'Posts obtained',
+				description: 'Tags obtained',
 				content: {
 					'application/json': {
 						schema: {
@@ -22,7 +22,17 @@ export const getPosts = {
 								data: {
 									type: 'array',
 									items: {
-										$ref: '#/components/schemas/getPosts',
+										type: 'object',
+										properties: {
+											id: {
+												type: 'integer',
+												example: 1,
+											},
+											name: {
+												type: 'string',
+												example: 'acuarela',
+											},
+										},
 									},
 								},
 							},

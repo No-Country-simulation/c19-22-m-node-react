@@ -16,9 +16,21 @@ const createPost = async (req, res, next) => {
 
 const getPosts = async (req, res, next) => {
 	const userId = Number(req.userId);
-	let { page = 1, size = null, tagId = null } = req.query;
 	try {
-		const response = await PostService.getAll(userId, page, size, tagId);
+		const response = await PostService.getAll(userId);
+		res.status(201).json(response);
+	} catch (error) {
+		console.log(error);
+		error.statusCode = 500;
+		next(error);
+	}
+};
+
+const searchPosts = async (req, res, next) => {
+	const userId = Number(req.userId);
+	const { tagId = null } = req.query;
+	try {
+		const response = await PostService.search(userId, tagId);
 		res.status(201).json(response);
 	} catch (error) {
 		console.log(error);
@@ -90,6 +102,7 @@ const deleteLike = async (req, res, next) => {
 export const PostController = {
 	createPost,
 	getPosts,
+	searchPosts,
 	getPost,
 	createComment,
 	deleteComment,

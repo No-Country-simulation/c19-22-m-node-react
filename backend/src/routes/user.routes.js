@@ -7,6 +7,7 @@ const router = Router();
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
 router.get('/profile', verifyToken, UserController.profile);
+router.post('/profile', verifyToken, UserController.editProfile);
 
 router.post('/friend-request', verifyToken, UserController.sendFriendRequest);
 router.post(

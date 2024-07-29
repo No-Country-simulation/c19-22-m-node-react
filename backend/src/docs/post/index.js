@@ -5,11 +5,17 @@ import { deleteComment } from './deleteComment.doc.js';
 import { deleteLike } from './deleteLike.doc.js';
 import { getPost } from './getPost.doc.js';
 import { getPosts } from './getPosts.doc.js';
+import { searchPosts } from './searchPosts.doc.js';
 
 export const postDocumentation = {
 	'/api/v1/posts': {
 		...createPost,
+	},
+	'/api/v1/posts/home': {
 		...getPosts,
+	},
+	'/api/v1/posts/search': {
+		...searchPosts,
 	},
 	'/api/v1/posts/comment/{postId}': {
 		...createComment,

@@ -13,6 +13,10 @@ export const Post = new EntitySchema({
 			type: 'varchar',
 			nullable: true,
 		},
+		description: {
+			type: 'varchar',
+			nullable: true,
+		},
 		creationDate: {
 			type: 'date',
 		},
@@ -25,10 +29,14 @@ export const Post = new EntitySchema({
 			nullable: true,
 		},
 		fontSize: {
-			type: 'int',
+			type: 'varchar',
 			nullable: true,
 		},
 		fontFamily: {
+			type: 'varchar',
+			nullable: true,
+		},
+		fontAlign: {
 			type: 'varchar',
 			nullable: true,
 		},

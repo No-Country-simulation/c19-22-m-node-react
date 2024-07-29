@@ -28,6 +28,22 @@ export const User = new EntitySchema({
 		password: {
 			type: 'varchar',
 		},
+		occupation: {
+			type: 'varchar',
+			nullable: true,
+		},
+		location: {
+			type: 'varchar',
+			nullable: true,
+		},
+		education: {
+			type: 'varchar',
+			nullable: true,
+		},
+		about: {
+			type: 'varchar',
+			nullable: true,
+		},
 	},
 	relations: {
 		friends: {

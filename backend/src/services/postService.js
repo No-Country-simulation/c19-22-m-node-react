@@ -1,4 +1,3 @@
-// import { ILike, Not } from 'typeorm';
 import PostDTO from '../dtos/post/PostDTO.js';
 import SearchPostDTO from '../dtos/post/SearchPostDto.js';
 import { commentRepository } from '../repositories/commentRepository.js';
@@ -10,7 +9,8 @@ import { uploadImg } from './uploadImage.js';
 const create = async (id, data, img) => {
 	const userId = Number(id);
 	let resImg = { imageUrl: null, imageId: null };
-	const tags = JSON.parse(`[${data.tags}]`);
+	let tags = [];
+	if (data.tags) tags = JSON.parse(`[${data.tags}]`);
 	if (img.mimetype !== 'text/plain') resImg = await uploadImg(img);
 
 	const post = {
@@ -25,14 +25,12 @@ const create = async (id, data, img) => {
 		post.tags = tags.map((tagId) => ({ id: tagId }));
 	}
 
-	if (data.tagId && data.tagId !== '') post.tags = [{ id: data.tagId }];
-
 	const item = postRepository.create(post);
 	await postRepository.save(item);
 	return ResponseDTO.success('Post created');
 };
 
-const getAll = async (userId, page, size, tagId) => {
+const getAll = async (userId, tagId) => {
 	const queryBuilder = postRepository
 		.createQueryBuilder('post')
 		.innerJoin('post.tags', 'tag')
@@ -46,18 +44,16 @@ const getAll = async (userId, page, size, tagId) => {
 
 	if (tagId) queryBuilder.andWhere('tag.id = :tagId', { tagId });
 
-	if (size !== null) {
-		queryBuilder.skip((page - 1) * size).take(size);
-	}
-
 	const posts = await queryBuilder
 		.select([
 			'post.id',
 			'post.content',
+			'post.description',
 			'post.backgroundColor',
 			'post.textColor',
 			'post.fontSize',
 			'post.fontFamily',
+			'post.fontAlign',
 			'post.imageUrl',
 			'comments.id',
 			'comments.content',
@@ -68,11 +64,9 @@ const getAll = async (userId, page, size, tagId) => {
 			'user.username',
 			'user.profilePic',
 			'likes.id',
-			'likeUser.id', // Incluye el id del usuario que hizo el like
-			'likeUser.username', // Incluye el nombre del usuario que hizo el like
+			'likeUser.id',
+			'likeUser.username',
 		])
-		.skip((page - 1) * size)
-		.take(size)
 		.getMany();
 
 	const postsDTO = posts.map((post) => new SearchPostDTO(post, userId));
@@ -80,10 +74,38 @@ const getAll = async (userId, page, size, tagId) => {
 	return ResponseDTO.success('Posts obtained', postsDTO);
 };
 
+const search = async (userId, tagId) => {
+	const queryBuilder = postRepository
+		.createQueryBuilder('post')
+		.innerJoin('post.tags', 'tag')
+		.where('post.user_id != :userId', { userId })
+		.orderBy('post."creationDate"', 'DESC');
+
+	if (tagId) queryBuilder.andWhere('tag.id = :tagId', { tagId });
+
+	const posts = await queryBuilder
+		.select([
+			'post.id',
+			'post.content',
+			'post.description',
+			'post.backgroundColor',
+			'post.textColor',
+			'post.fontSize',
+			'post.fontFamily',
+			'post.fontAlign',
+			'post.imageUrl',
+		])
+		.getMany();
+
+	// const postsDTO = posts.map((post) => new SearchPostDTO(post, userId));
+
+	return ResponseDTO.success('Posts obtained', posts);
+};
+
 const getById = async (id) => {
 	const post = await postRepository.findOne({
 		where: { id },
-		relations: ['user'],
+		relations: ['user', 'comments', 'comments.user', 'likes'],
 	});
 	const postDTO = new PostDTO(post);
 	return ResponseDTO.success('Post obtained', postDTO);
@@ -140,6 +162,7 @@ const deleteLike = async (postId, userId) => {
 export const PostService = {
 	create,
 	getAll,
+	search,
 	getById,
 	createComment,
 	deleteComment,

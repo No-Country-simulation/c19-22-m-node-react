@@ -5,6 +5,7 @@ const extensionesValidas = ['png', 'jpg', 'jpeg'];
 
 export const uploadImg = async (img) => {
 	const name = img.name.split('.');
+	console.log(img.name);
 	const extension = name[name.length - 1];
 
 	if (!extensionesValidas.includes(extension)) {
