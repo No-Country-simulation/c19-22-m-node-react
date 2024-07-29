@@ -154,8 +154,13 @@ const editProfile = async (req, res) => {
 		const data = req.body;
 		const { profilePic } = req.files;
 		let resImg = { profilePic: null, imageId: null };
-		if (profilePic.mimetype !== 'text/plain')
-			resImg = await uploadImg(profilePic);
+		if (profilePic.mimetype !== 'text/plain') {
+			const res = await uploadImg(profilePic);
+			resImg = {
+				profilePic: res.imageUrl,
+				imageId: res.imageId,
+			};
+		}
 
 		const profile = {
 			...data,
