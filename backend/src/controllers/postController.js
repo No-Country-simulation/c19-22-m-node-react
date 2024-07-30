@@ -100,6 +100,18 @@ const deleteLike = async (req, res, next) => {
 	}
 };
 
+const getLikes = async (req, res, next) => {
+	const userId = Number(req.userId);
+	try {
+		const response = await PostService.getLikes(userId);
+		res.status(200).json(response);
+	} catch (error) {
+		console.log(error);
+		error.statusCode = 500;
+		next(error);
+	}
+};
+
 export const PostController = {
 	createPost,
 	getPosts,
@@ -109,4 +121,5 @@ export const PostController = {
 	deleteComment,
 	createLike,
 	deleteLike,
+	getLikes,
 };

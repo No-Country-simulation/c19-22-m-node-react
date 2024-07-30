@@ -1,3 +1,4 @@
+import LikeDTO from '../dtos/like/LikeDTO.js';
 import PostDTO from '../dtos/post/PostDTO.js';
 import SearchPostDTO from '../dtos/post/SearchPostDTO.js';
 import { commentRepository } from '../repositories/commentRepository.js';
@@ -159,6 +160,19 @@ const deleteLike = async (postId, userId) => {
 	}
 };
 
+const getLikes = async (userId) => {
+	const likes = await likeRepository
+		.createQueryBuilder('like')
+		.leftJoinAndSelect('like.post', 'post')
+		.leftJoin('post.user', 'user')
+		.leftJoinAndSelect('like.user', 'likeUser')
+		.where('user.id = :userId', { userId })
+		.orderBy('like.creationDate', 'DESC')
+		.getMany();
+	const likesDTO = likes.map((like) => new LikeDTO(like));
+	return ResponseDTO.success('Likes obtained', likesDTO);
+};
+
 export const PostService = {
 	create,
 	getAll,
@@ -168,4 +182,5 @@ export const PostService = {
 	deleteComment,
 	createLike,
 	deleteLike,
+	getLikes,
 };
