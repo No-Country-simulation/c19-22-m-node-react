@@ -125,9 +125,7 @@ const login = async (req, res) => {
 			return res.status(400).json({ msg: 'Username or password incorrect' });
 		}
 
-		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-			expiresIn: '1h',
-		});
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
 		return res.json({ ok: true, token });
 	} catch (error) {
@@ -140,6 +138,20 @@ const profile = async (req, res) => {
 	try {
 		const user = await AppDataSource.getRepository(User).findOne({
 			where: { id: req.userId },
+			relations: ['posts'],
+		});
+		return res.json(user);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Error server' });
+	}
+};
+
+const getProfile = async (req, res) => {
+	const { userId } = req.params;
+	try {
+		const user = await AppDataSource.getRepository(User).findOne({
+			where: { id: userId },
 			relations: ['posts'],
 		});
 		return res.json(user);
@@ -286,4 +298,5 @@ export const UserController = {
 	rejectFriendRequest,
 	getAllUsers,
 	editProfile,
+	getProfile,
 };

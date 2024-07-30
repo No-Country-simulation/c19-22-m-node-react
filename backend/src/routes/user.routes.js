@@ -8,6 +8,7 @@ router.post('/register', UserController.register);
 router.post('/login', UserController.login);
 router.get('/profile', verifyToken, UserController.profile);
 router.post('/profile', verifyToken, UserController.editProfile);
+router.get('/searchprofile/:userId', UserController.getProfile);
 
 router.post('/friend-request', verifyToken, UserController.sendFriendRequest);
 router.post(
