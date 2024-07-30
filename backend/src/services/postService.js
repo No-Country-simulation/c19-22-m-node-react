@@ -105,7 +105,7 @@ const search = async (userId, tagId) => {
 const getById = async (id) => {
 	const post = await postRepository.findOne({
 		where: { id },
-		relations: ['user', 'comments', 'comments.user', 'likes'],
+		relations: ['user', 'comments', 'comments.user', 'likes', 'likes.user'],
 	});
 	const postDTO = new PostDTO(post, id);
 	return ResponseDTO.success('Post obtained', postDTO);
