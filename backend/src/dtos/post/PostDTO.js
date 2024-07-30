@@ -1,5 +1,5 @@
 export default class PostDTO {
-	constructor(post) {
+	constructor(post, userId) {
 		this.id = post.id;
 		this.username = post.user.username;
 		this.userPic = post.user.profilePic;
@@ -13,6 +13,9 @@ export default class PostDTO {
 		this.fontAlign = post.fontAlign;
 		this.likes = post.likes.length;
 		this.description = post.description;
+		this.isLikedByCurrentUser = post.likes.some(
+			(like) => like.user.id === userId,
+		);
 		this.comments = post.comments.map((comment) => ({
 			id: comment.id,
 			username: comment.user.username,

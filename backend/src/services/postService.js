@@ -107,7 +107,7 @@ const getById = async (id) => {
 		where: { id },
 		relations: ['user', 'comments', 'comments.user', 'likes'],
 	});
-	const postDTO = new PostDTO(post);
+	const postDTO = new PostDTO(post, id);
 	return ResponseDTO.success('Post obtained', postDTO);
 };
 
