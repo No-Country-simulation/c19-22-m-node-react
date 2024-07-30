@@ -11,9 +11,9 @@ import { useState, useRef, useEffect, useCallback } from "react";
 export const Notifications = () => {
   const [likesCommentsOrFollowes, setLikesCommentsOrFollowers] = useState('likes');
   /* const [query, setQuery] = useState(''); */
-  const [likes, setLikes] = useState([]);
+  /* const [likes, setLikes] = useState([]);
   const [comments, setComments] = useState([]);
-  const [followers, setFollowers] = useState([]);
+  const [followers, setFollowers] = useState([]); */
 
 
   let navigate = useNavigate();
@@ -36,18 +36,35 @@ export const Notifications = () => {
     { id: 2, username: 'user2', nombre: 'Lara Dumont', pic: user2 },    
   ];
 
+  const likes = [
+    { id: 1, username: 'user1',  userpic: user1, postPic: imagePost },
+    { id: 2, username: 'user2', userpic: user2, postPic: imagePost },    
+  ];
 
-  const userActivity = { id: 1, posts: [{ id: 101, likes: ['user1', 'user2', 'user3'], comments: ["que bien", "maravilloso"]},
-      {
-        id: 102,
-        likes: ['user4', 'user5'],
-        comments: [/* ... */]
-      }
-    ],
-    followers: [/* ... */]
-  };
+  const comments = [
+    { id: 1, username: 'user1',  userpic: user1, postPic: imagePost, content: 'Que hermoso!' },
+    { id: 2, username: 'user2', userpic: user2, postPic: imagePost, content: 'Como se llama la técnica?' },    
+  ];
+
+  //falta completar
+  const followers = [
+    { id: 1, username: 'user1',  userpic: user1, postPic: imagePost, content: 'Que hermoso!' },
+    { id: 2, username: 'user2', userpic: user2, postPic: imagePost, content: 'Como se llama la técnica?' },    
+  ];
 
 
+  // const userActivity = { id: 1, posts: [{ id: 101, likes: ['user1', 'user2', 'user3'], comments: ["que bien", "maravilloso"]},
+  //     {
+  //       id: 102,
+  //       likes: ['user4', 'user5'],
+  //       comments: [/* ... */]
+  //     }
+  //   ],
+  //   followers: [/* ... */]
+  // };
+
+
+  
 
   //cambio de pestaña
   const handleLikesTab = () => {
@@ -84,7 +101,6 @@ export const Notifications = () => {
                 <h4 className="font-semibold">Seguidores</h4>
             </button>
           </div>
-
         </div>
 
 
@@ -108,7 +124,7 @@ export const Notifications = () => {
         ) : likesCommentsOrFollowes === 'comments' ?(
           <div>
             {comments.map((commentElement) => (
-              <div className="fila-usuario1 py-2 px-4 flex justify-between items-center">
+              <div key={commentElement.id} className="fila-usuario1 py-2 px-4 flex justify-between items-center">
                 <div className="profilepic-nombre flex gap-2 items-center">
                   <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
                         <img className='w-full h-full object-cover' src={commentElement.userpic} alt="" />
@@ -117,17 +133,17 @@ export const Notifications = () => {
                         <p className="text-sm"><strong className="text-sm">{commentElement.username}</strong>{` ${commentElement.content}`}</p>
                   </div>                
                 </div>
-                <img className="w-[44px] h-[44px] overflow-hidden rounded-lg" src={commentElement.postpic} alt="" />
+                <img className="w-[44px] h-[44px] overflow-hidden rounded-lg" src={commentElement.postPic} alt="" />
               </div>
             ))}
           </div>          
         ) : ( 
           <div>
               {followers.map((followersElement) => (
-              <div className="fila-usuario1 py-2 px-4 flex justify-between items-center">
+              <div key={followersElement.id} className="fila-usuario1 py-2 px-4 flex justify-between items-center">
                 <div className="profilepic-nombre flex gap-2 items-center">
                   <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
-                        <img className='w-full h-full object-cover' src={followersElement.pic} alt="" />
+                        <img className='w-full h-full object-cover' src={followersElement.userpic} alt="" />
                   </div>
                   <p className="font-semibold text-sm">{followersElement.username}</p>
                 </div>

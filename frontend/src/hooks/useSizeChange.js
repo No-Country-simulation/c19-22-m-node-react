@@ -1,13 +1,13 @@
 import { useState } from "react"
 
 export const useSizeChange = () => {
-    const [changeSize, setChangeSize] = useState('base')
+    const [changeSize, setChangeSize] = useState('lg')
     
 
     const handleChangeSize = () => {
-        if (changeSize == 'base')
+        if (changeSize == 'lg')
         { sizeBig()}
-        else if (changeSize == 'xl')
+        else if (changeSize == '2xl')
             { sizeSmall()}
         else {
             sizeMedium()
@@ -16,14 +16,14 @@ export const useSizeChange = () => {
     
 
     const sizeMedium = () => {
-        setChangeSize('base')
+        setChangeSize('lg')
     }
     
     const sizeSmall = () => {
         setChangeSize('sm')
     }
     const sizeBig = () => {
-        setChangeSize('xl')
+        setChangeSize('2xl')
     }
 
     return { handleChangeSize, changeSize}

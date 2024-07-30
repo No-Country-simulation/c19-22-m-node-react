@@ -1,7 +1,7 @@
 /* import Navbar from "./components/navbar/Navbar"; */
 import './index.css'
 import './App.css'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate, redirect } from "react-router-dom"
 import { Register } from "./components/register/Register"
 import { Home } from './components/home/Home';
 import { Navbar } from './components/navbar/Navbar';
@@ -16,14 +16,23 @@ import { Followers } from './components/notifications/Followers';
 import { Find } from './components/find/Find';
 import { TagGrid } from './components/find/TagGrid';
 import { FindMockeado } from './components/find/FindMockeado';
-import { PostFind } from './components/postFind/PostFind';
+import { PostFound } from './components/postFind/PostFound';
 
 
 function App() {
+
+  
+
   return (
     <>
       <BrowserRouter>
         <Routes>
+        <Route
+            path="/"
+            element={            
+              localStorage.getItem('token')? <Navigate to='/home'/> : <Navigate to='/login'/>
+            }
+          />
           <Route
             path="/register"
             element={
@@ -44,7 +53,7 @@ function App() {
           }
 
           <Route
-            path="/"
+            path="/home"
             element={
               <div>
                 <Header />
@@ -66,7 +75,7 @@ function App() {
                 <Navbar/>
               </div> }/>
 
-          <Route path="/find/tag/:tagName" element={ 
+          <Route path="/find/tag/:tagId" element={ 
               <div className='min-h-screen flex flex-col'> 
                 <Header/>               
                 <TagGrid/>
@@ -75,7 +84,7 @@ function App() {
           <Route path="/post/:postId" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
-                <PostFind/>
+                <PostFound/>
                 <Navbar/>
               </div> }/>
 
@@ -95,14 +104,14 @@ function App() {
 
                    
 
-          {/* <Route path="/notifications" element={ 
+          <Route path="/notifications" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <Notifications/>
                 <Navbar/>
               </div> }/>
 
-          <Route path="/comments" element={ 
+          {/* <Route path="/comments" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
                 <Comments/>
@@ -114,7 +123,7 @@ function App() {
                 <Header/>
                 <Followers/>
                 <Navbar/>
-              </div> }/>    */}
+              </div> }/> */}   
       </Routes>
     </BrowserRouter>      
     </>

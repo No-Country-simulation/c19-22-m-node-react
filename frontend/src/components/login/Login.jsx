@@ -1,25 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"
 import logo from "../../assets/logoSVG.svg";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  let navigate = useNavigate()
+
+
   const urlFer = "http://viaduct.proxy.rlwy.net:25260/api/v1/users/login";
-  /* const [errorFetch, setErrorFetch] = useState(null) */
-
-  /* const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(null) */
-
-  /* useEffect(()=>{
-    if (!name || !password){
-        setErroIncompleteFields(true)
-        return
-    }
-    else {
-        setErroIncompleteFields(false)
-    }
-}, [password, name])  */
+  
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -42,27 +34,24 @@ export const Login = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        /* data.status */
-        console.log(data);
+      .then((data) => {        
         const token = data.token
         localStorage.setItem('token', token)
+        if (token){
+          navigate('/home')
+        } else {
+          navigate('/login')
+          return
+        } 
+        console.log(data);
+               
       }) 
       .catch((error) => {
-        console.log(error);
-        // setErrorFetch(true)
-      });
-   
-
+        console.log(error);        
+      }); 
   }
 
-  /* if (errorFetch) {
-        return (
-            <div>
-                <p>No puedes acceder a tu cuenta por ahora</p>
-            </div>
-        )
-    } */
+  
 
   return (
     <section className="login h-[640px] flex flex-col gap-12 items-center justify-center">
@@ -107,14 +96,7 @@ export const Login = () => {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-custom-gray-80 "
-                /* style={{
-                                        height: 'calc(100% - 2px)',
-                                        top: '1px',
-                                        right: '1px',
-                                        borderTopRightRadius: '0.5rem',
-                                        borderBottomRightRadius: '0.5rem',
-                                    }} */
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-custom-gray-80 "                
               >
                 {showPassword ? (
                   <svg

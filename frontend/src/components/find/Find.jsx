@@ -148,7 +148,7 @@ useEffect(() => {
   };
 
   const handleTagClick = (tag) => {
-    navigate(`/find/tag/${tag.name}`);
+    navigate(`/find/tag/${tag.id}`);
   };
 
 
