@@ -17,6 +17,9 @@ import { Find } from './components/find/Find';
 import { TagGrid } from './components/find/TagGrid';
 import { FindMockeado } from './components/find/FindMockeado';
 import { PostFound } from './components/postFind/PostFound';
+import { ConfiguracionProfile } from './components/configuracionProfile/ConfiguracionProfile';
+import { EditProfile } from './components/editProfile/EditProfile';
+import { FriendProfile } from './components/friendProfile.jsx/FriendProfile';
 
 
 function App() {
@@ -28,14 +31,12 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route
-            path="/"
-            element={            
+            path="/" element={            
               localStorage.getItem('token')? <Navigate to='/home'/> : <Navigate to='/login'/>
             }
           />
           <Route
-            path="/register"
-            element={
+            path="/register" element={
               <div>
                 <Register />
               </div>
@@ -43,8 +44,7 @@ function App() {
           />
           {
             <Route
-              path="/login"
-              element={
+              path="/login" element={
                 <div>
                   <Login />
                 </div>
@@ -53,8 +53,7 @@ function App() {
           }
 
           <Route
-            path="/home"
-            element={
+            path="/home" element={
               <div>
                 <Header />
                 <Home />
@@ -63,24 +62,29 @@ function App() {
             }
           />
 
+          {/* BUSCAR */}
           <Route path="/find" element={ 
               <div className='min-h-screen flex flex-col'>                
                 <Find/>
                 <Navbar/>
               </div> }/>
 
+          {/* ENTRAR AL PERFIL DE UN AMIGO */}
           <Route path="/find/account/:id" element={ 
               <div className='min-h-screen flex flex-col'>                
-                {/* <Accounts/> */}
+                <FriendProfile/>
                 <Navbar/>
               </div> }/>
 
+          {/* ENTRAR A LA GRILLA DE POST SEGUN ETIQUETA BUSCADA */}
           <Route path="/find/tag/:tagId" element={ 
               <div className='min-h-screen flex flex-col'> 
                 <Header/>               
                 <TagGrid/>
                 <Navbar/>
               </div> }/>
+
+          {/* ENTRAR AL POST SELECCIONADO DE LA GRILLA DE POSTS DE BUSQUEDA DE ETIQUETA O DE LA GRILLA DEL PERFIL */}
           <Route path="/post/:postId" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
@@ -88,12 +92,7 @@ function App() {
                 <Navbar/>
               </div> }/>
 
-          <Route path="/profile" element={ 
-              <div className='min-h-screen flex flex-col'>
-                <Header/>
-                <Profile/>
-                <Navbar/>
-              </div> }/> 
+           
 
           <Route path="/publish" element={ 
               <div className='min-h-screen flex flex-col'>
@@ -111,19 +110,27 @@ function App() {
                 <Navbar/>
               </div> }/>
 
-          {/* <Route path="/comments" element={ 
+
+
+          {/* PERFIL PROPIO */}
+          <Route path="/profile" element={ 
               <div className='min-h-screen flex flex-col'>
                 <Header/>
-                <Comments/>
+                <Profile/>
                 <Navbar/>
               </div> }/>
 
-          <Route path="/followers" element={ 
-              <div className='min-h-screen flex flex-col'>
-                <Header/>
-                <Followers/>
+          <Route path="/configuracion" element={ 
+              <div className='min-h-screen flex flex-col'>                            
+                <ConfiguracionProfile/>
                 <Navbar/>
-              </div> }/> */}   
+              </div> }/> 
+
+          <Route path="/editprofile" element={ 
+              <div className='min-h-screen flex flex-col'>            
+                <EditProfile/>
+                <Navbar/>
+              </div> }/>            
       </Routes>
     </BrowserRouter>      
     </>

@@ -3,9 +3,15 @@ import React from "react";
 
 
 
-export const PostConTexto = ({colorSeleccionado, changeAlign, fontChange, changeSize, colorSeleccionadoTexto, write, valueTextarea, inputRef, setValueTextarea, profile, onClick=()=>{}}) => {
+export const PostConTexto = ({colorSeleccionado, changeAlign, fontChange, changeSize, colorSeleccionadoTexto, write, valueTextarea, inputRef, setValueTextarea, profile, onClick=()=>{}, notifications}) => {
 
-    const classname = profile? "w-full h-full aspect-square object-cover object-center": "h-[375px] w-[375px] mt-6 p-4"
+    let classname =  "h-[375px] w-[375px] mt-6 p-4"
+    if (profile) {
+        classname =  "w-full h-full aspect-square object-cover object-center"
+    }
+    if (notifications) {
+        classname = "origin-top-left w-[375px] h-[375px] rounded-lg scale-0.12"
+    }
   
     
   

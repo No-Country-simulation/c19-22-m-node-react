@@ -32,9 +32,10 @@ export default {
         oswald: ['Oswald', 'sans-serif'],
         dancing: ['Dancing Script', 'cursive'],
         bitter: ['Bitter', 'serif'],
-       
-        
       },
+      scale: {
+        '0.12': '0.12'
+      }
     },
   },
   plugins: [],

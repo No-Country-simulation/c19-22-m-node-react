@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import { PostConTexto } from "../postConTexto/PostConTexto";
 import { HamburguerIcon } from "../icons/HamburguerIcon";
 
@@ -7,17 +7,17 @@ import { HamburguerIcon } from "../icons/HamburguerIcon";
 
 
 
-export const Profile = () => {
+export const FriendProfile = () => {
 
   let navigate = useNavigate();
 
   const [user, setUser] = useState({})
   const [posts, setPosts] = useState([]);
-
+  const { id } = useParams()
 
 
   useEffect(()=>{
-    fetch('http://viaduct.proxy.rlwy.net:25260/api/v1/users/profile',{
+    fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/users/searchprofile/${id}`,{
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -60,12 +60,7 @@ export const Profile = () => {
                       <p className=" text-sm">{`${user.name} ${user.lastname}`}</p>
                       <p className=" text-sm">{user.occupation}</p>
                     </div>                                    
-                </div>
-                <div className="m-4 mt-6">
-                    <button onClick={handleConfig}>
-                      <HamburguerIcon/>
-                    </button>                    
-                </div>                
+                </div>                                
           </div>
           
 

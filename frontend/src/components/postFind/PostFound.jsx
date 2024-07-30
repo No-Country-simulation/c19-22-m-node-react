@@ -8,19 +8,10 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect, } from "react";
 /* import user1 from '../../assets/user1.jpg' */
 
-
-
-
-
-
 import { PostConTexto } from "../postConTexto/PostConTexto";
 
 
 
-
-/* const mockPosts = 
-    { id: 1, pic: null, username: 'lara.tobala', userPic:user1 , likes: 2, description: 'Me gusta', content: 'Hola probando texto', backgroundColor: '#000000', textColor: '#712F8E', fontSize: 'lg', fontFamily: 'playfair', fontAlign: 'left' }   */
-  
 
 
 export const PostFound = () => {
