@@ -102,12 +102,12 @@ const search = async (userId, tagId) => {
 	return ResponseDTO.success('Posts obtained', posts);
 };
 
-const getById = async (id) => {
+const getById = async (id, userId) => {
 	const post = await postRepository.findOne({
 		where: { id },
 		relations: ['user', 'comments', 'comments.user', 'likes', 'likes.user'],
 	});
-	const postDTO = new PostDTO(post, id);
+	const postDTO = new PostDTO(post, userId);
 	return ResponseDTO.success('Post obtained', postDTO);
 };
 

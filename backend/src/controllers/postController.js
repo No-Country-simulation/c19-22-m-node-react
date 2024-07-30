@@ -41,9 +41,9 @@ const searchPosts = async (req, res, next) => {
 
 const getPost = async (req, res, next) => {
 	const { id } = req.params;
-	const userId = Number(id);
+	const userId = Number(req.userId);
 	try {
-		const response = await PostService.getById(userId);
+		const response = await PostService.getById(id, userId);
 		res.status(200).json(response);
 	} catch (error) {
 		console.log(error);
