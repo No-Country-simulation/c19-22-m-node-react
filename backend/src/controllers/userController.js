@@ -153,19 +153,24 @@ const editProfile = async (req, res) => {
 	try {
 		const userId = Number(req.userId);
 		const data = req.body;
-		const { profilePic } = req.files;
-		let resImg = { profilePic: null, imageId: null };
-		if (profilePic.mimetype !== 'text/plain') {
-			const res = await uploadImg(profilePic);
-			resImg = {
-				profilePic: res.imageUrl,
-				imageId: res.imageId,
-			};
+		const profilePic = req.files?.profilePic;
+
+		if (data.editImage === 'true') {
+			let resImg = { profilePic: null, imageId: null };
+			if (profilePic.mimetype !== 'text/plain') {
+				const res = await uploadImg(profilePic);
+				resImg = {
+					profilePic: res.imageUrl,
+					imageId: res.imageId,
+				};
+			}
+			data.profilePic = resImg.profilePic;
 		}
+
+		delete data.editImage;
 
 		const profile = {
 			...data,
-			...resImg,
 		};
 
 		await AppDataSource.getRepository(User).update(userId, profile);

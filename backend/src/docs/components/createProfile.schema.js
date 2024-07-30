@@ -25,6 +25,10 @@ export const createProfileSchema = {
 			type: 'string',
 			example: 'Artista plástica y Diseñadora gráfica',
 		},
+		editImage: {
+			type: 'boolean',
+			example: 'true',
+		},
 		about: {
 			type: 'string',
 			example:
