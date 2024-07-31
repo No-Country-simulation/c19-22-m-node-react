@@ -16,11 +16,11 @@ const TextAlign = ({ handleChangeAlign, changeAlign, paraPasarRef }) => {
         paraPasarRef()
     }
     
-    console.log('align en el TextAlign.jsx', changeAlign)
+    /* console.log('align en el TextAlign.jsx', changeAlign) */
 
 
     return (
-        <button onClick={handleChangeAlign} className='aligning-text text-white'>                              
+        <button onClick={handleChangeAlign} className='aligning_text text-white'>                              
                             
             {changeAlign == 'center'? (
                 <CiTextAlignCenter className="h-[24px] w-[24px]"/>

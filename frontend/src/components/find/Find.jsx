@@ -159,7 +159,7 @@ useEffect(() => {
       <div className='header-find py-4 px-4 shadow-md'>
         <input
           type="text"
-          className="w-full bg-transparent border-2 border-custom-gray-50 focus:outline-custom-gray-50 pt-3 pr-4 pb-3 pl-5 rounded-md"
+          className="w-full bg-transparent border-2 border-custom-gray-50 focus:outline-custom-gray-50 pt-3 pr-4 pb-3 pl-5 rounded-md text-sm"
           placeholder="Buscar"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -171,12 +171,12 @@ useEffect(() => {
       <div className="bg-custom-gray-10 flex items-center justify-center gap-10 px-4 pb-1 shadow-up-dark-md">
         <div className={`border-b-4 pt-2 pb-1 w-[188px] flex justify-center ${accountOrTag === 'accounts' ? 'border-primario' : 'border-none'}`}>
           <button onClick={handleAccountTab}>
-            <h4 className="font-semibold text-center">Cuentas</h4>
+            <h4 className="font-semibold text-sm text-center">Cuentas</h4>
           </button>
         </div>
         <div className={`border-b-4 pt-2 pb-1 w-[188px] flex justify-center ${accountOrTag === 'tags' ? 'border-primario' : 'border-none'}`}>
           <button onClick={handleHashtagTab}>
-            <h4 className="font-semibold text-center">Etiquetas</h4>
+            <h4 className="font-semibold text-sm text-center">Etiquetas</h4>
           </button>
         </div>
       </div>
@@ -191,8 +191,8 @@ useEffect(() => {
                     <img className='w-full h-full object-cover' src={account.profilePic} alt="" />
                   </div>
                   <div className="w-[230px]">
-                    <p onClick={() => handleAccountClick(account)} className="text-sm font-semibold">{account.username}</p>
-                    <p className="text-sm">{account.name}{account.lastname}</p>
+                    <p onClick={() => handleAccountClick(account)} className="text-almost-xs font-semibold">{account.username}</p>
+                    <p className="text-almost-xs">{account.name}{account.lastname}</p>
                   </div>
                 </div>
               </div>

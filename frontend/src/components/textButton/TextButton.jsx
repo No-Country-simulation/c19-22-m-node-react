@@ -9,6 +9,7 @@ import { RiFontSize } from "react-icons/ri";
 import TextAlign from '../textAlign/TextAlign';
 import TextFont from '../textFont/TextFont';
 import TextSize from '../textSize/TextSize';
+import { X } from '../icons/X';
 
 
 
@@ -47,14 +48,12 @@ const TextButton = ({textColorSelected, readyToWrite, crearRef, crearRef1, crear
             </div>
     
             {showTEditor && (
-                <div className='mg_menu__backdrop'>
+                <div className={`mg_menu__backdrop ${showTEditor ? 'visible' : ''}`}>
                     <div className="bg-custom-gray-90 menutext">
                         <div className='flex justify-between items-start text-start  gap-2 pb-2'>
                             <div className='flex gap-2'>
                                 <button onClick={handleCloseT} className='cursor-pointer text-white'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                    </svg>
+                                    <X/>
                                 </button>  
                                 <h4 className='text-white text-base'>Editar texto</h4>
                             </div>
@@ -69,7 +68,7 @@ const TextButton = ({textColorSelected, readyToWrite, crearRef, crearRef1, crear
                             
                             <TextAlign paraPasarRef={crearRef1} handleChangeAlign={handleChangeAlign} changeAlign={changeAlign}/>
                             
-                            <ColorPicker paraPasarRef={crearRef} sendClean={() => {}} onColorChange={manejarCambioColor}/>
+                            <ColorPicker textColor paraPasarRef={crearRef} sendClean={() => {}} onColorChange={manejarCambioColor}/>
 
                             <TextFont paraPasarRef={crearRef2} handleFontChange={handleFontChange} fontChange={fontChange}/>
 

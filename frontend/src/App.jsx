@@ -20,6 +20,7 @@ import { PostFound } from './components/postFind/PostFound';
 import { ConfiguracionProfile } from './components/configuracionProfile/ConfiguracionProfile';
 import { EditProfile } from './components/editProfile/EditProfile';
 import { FriendProfile } from './components/friendProfile.jsx/FriendProfile';
+import { HeaderBack } from './components/headerBack/HeaderBack';
 
 
 function App() {
@@ -54,9 +55,11 @@ function App() {
 
           <Route
             path="/home" element={
-              <div>
+              <div className='min-h-screen flex flex-col'>
                 <Header />
-                <Home />
+                <div className='flex-grow'>
+                  <Home />
+                </div>
                 <Navbar />
               </div>
             }
@@ -88,7 +91,7 @@ function App() {
           {/* ENTRAR AL POST SELECCIONADO DE LA GRILLA DE POSTS DE BUSQUEDA DE ETIQUETA O DE LA GRILLA DEL PERFIL */}
           <Route path="/post/:postId" element={ 
               <div className='min-h-screen flex flex-col'>
-                <Header/>
+                <HeaderBack/>
                 <PostFound/>
                 <Navbar/>
               </div> }/>

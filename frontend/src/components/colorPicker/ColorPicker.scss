@@ -1,92 +1,52 @@
 
-
 .mg_menu__backdrop {
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.5); /* Añadido para tener un fondo semi-transparente */
     position: fixed;
     inset: 0;
-    visibility: hidden;
-    /* opacity: 0; */
-    transition: all .15s .2s;
+    visibility: hidden; /* Por defecto, es oculto */
+    opacity: 0; /* Por defecto, es transparente */
+    transition: opacity .15s .2s, visibility .15s .2s;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 999; /* Asegúrate de que esté sobre otros elementos */
 }
-   
 
-.menucolor {            
-    
+.mg_menu__backdrop.visible {
+    visibility: visible; /* Cuando 'showCP' es true */
+    opacity: 1; /* Cuando 'showCP' es true */
+    background-color: transparent;
+}
+
+.menucolor {
     background-color: black;
     position: absolute;
-    width: 100%;        
-    bottom: 0px;
-    padding: 20px;        
+    width: 100%;
+    bottom: 0;
+    padding: 20px;
     transition: top .15s ease-in-out;    
-    z-index: 1;
+    z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
 }
 
-/* .mg_row{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-} */
-
-
-.mg_search{
+/* Resto de tu CSS */
+.mg_search {
     width: 200px;
     display: flex;
 }
 
-.mg_menulist_close_icon{
+.mg_menulist_close_icon {
     font-size: 1.5rem;
-    /* margin-left: auto; */
 }
 
-    
-
-
-.magnifying-glass_icon_menu{    
+.magnifying-glass_icon_menu {    
     font-size: 1.8rem;
     cursor: pointer;
 }
 
-
-
-// .mg_menu-active {
-//     .mg_menu__backdrop {
-//         visibility: visible;
-//         /* opacity: 1; */
-//         transition: all .15s;
-
-//         .mg_menulist {
-//             top: 0px; /* esto es para que baje desde arriba la lupa */ 
-//             transition: top .15s ease-in-out .1s;
-//         }            
-//     }
-// }
-
-/* @media screen and (min-width: 768px) {
-    .mg_menu-active {
-        .mg_menu__backdrop {            
-            .mg_menulist {
-                top: 200px;
-                transition: top .15s ease-in-out .1s;
-
-                .mg_search{
-                    width: 350px;        
-                }
-
-            }                
-        }
-    }
-    
-    
-} */
-
-
 /* *********************************************************** */
 @media screen and (min-width: 1024px) {
-    .mg_menu{
+    .mg_menu {
         display: none;
     } 
 }
@@ -104,17 +64,17 @@
     flex-wrap: wrap;
     gap: 10px;
 }
-  
-  .color-option {
+
+.color-option {
     display: inline-block;
     cursor: pointer;
-  }
-  
-  .color-option input {
+}
+
+.color-option input {
     display: none;
-  }
-  
-  .color-circle {
+}
+
+.color-circle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,17 +82,15 @@
     height: 24px;
     border-radius: 50%;
     border: 2px solid #ccc;
-  }
-  
-  .inner-circle {
+}
+
+.inner-circle {
     width: 12px;
     height: 12px;
     background-color: black;
     border-radius: 50%;
-  }
-  
-  .selected-color {
+}
+
+.selected-color {
     margin-top: 10px;
-    
-    
-  }
+}

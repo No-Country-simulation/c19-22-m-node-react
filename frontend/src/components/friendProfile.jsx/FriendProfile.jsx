@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { PostConTexto } from "../postConTexto/PostConTexto";
-import { HamburguerIcon } from "../icons/HamburguerIcon";
 import { urlBase } from "../../constants/urlBase";
+import './friendProfile.css'
 
 
 
@@ -14,6 +14,7 @@ export const FriendProfile = () => {
 
   const [user, setUser] = useState({})
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams()
 
 
@@ -29,6 +30,7 @@ export const FriendProfile = () => {
     .then(data => {
       setUser(data)
       setPosts(data.posts)
+      setLoading(false);
     })
 }, [])
 
@@ -40,10 +42,16 @@ export const FriendProfile = () => {
   };
 
 
-  //cuando clickean en hamburguesa
-  const handleConfig = () => {
-    navigate('/configuracion');    
-  };
+  if (loading) {
+    return (
+      <section className='profile pt-11'>
+        <div className="flex justify-center">
+          <svg className="spinner" viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+          </svg>
+        </div>
+      </section>)
+  }
   
 
 
@@ -51,17 +59,21 @@ export const FriendProfile = () => {
       <section className='profile pt-4'>
         <div>
           <div className="flex justify-between">
-              <div className="pic-username py-3 pb-6 px-8 flex gap-3 items-center">
-                    <div className="para-recortar-foto w-[74px] h-[74px] overflow-hidden rounded-full">
-                        <img className='w-full h-full object-cover' src={user.profilePic} alt="" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-lg">{user.username}</p>                  
-                      <p className=" text-sm">{`${user.name} ${user.lastname}`}</p>
-                      <p className=" text-sm">{user.occupation}</p>
-                    </div>                                    
-                </div>                                
-          </div>
+            {user?
+              (<div>
+                  <div className="pic-username py-3 pb-6 px-8 flex gap-3 items-center">
+                        <div className="para-recortar-foto w-[74px] h-[74px] overflow-hidden rounded-full">
+                            <img className='w-full h-full object-cover' src={user.profilePic} alt="" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-almost-xs">{user.username}</p>                  
+                          <p className=" text-xs">{`${user.name} ${user.lastname}`}</p>
+                          <p className=" text-xs">{user.occupation}</p>
+                        </div>                                    
+                  </div>                                
+          </div>)
+          : <div></div>}
+        </div>
           
 
             <div className="grid-results grid grid-cols-3 overflow-hidden">

@@ -1,6 +1,4 @@
 
-import React from "react";
-import { PiTextT } from "react-icons/pi";
 import ColorPicker from "../colorPicker/ColorPicker.jsx";
 import { useState, useRef, useEffect } from "react";
 import TextButton from "../textButton/TextButton.jsx";
@@ -11,7 +9,7 @@ import { useSizeChange } from "../../hooks/useSizeChange.js";
 import { X } from "../icons/X.jsx";
 import { useNavigate } from "react-router-dom";
 import { PostConTexto } from "../postConTexto/PostConTexto.jsx";
-import { UploadIcon } from "../icons/UploadIcon.jsx";
+
 import { CameraIcon } from "../icons/CameraIcon.jsx";
 import { TextoDesactivado } from "../buttons/TextoDesactivado.jsx";
 import { PantallaLimpia } from "./PantallaLimpia.jsx";
@@ -379,14 +377,14 @@ export const Publish = () => {
                 {pantallaLimpia ? (
                     <PantallaLimpia/>
                 ) : selectedImage ? (
-                    <div className="h-[375px] w-[375px] mt-6 p-4 overflow-hidden">                    
+                    <div className="h-[375px] w-[375px] mx-auto box-border max-w-full mt-6 overflow-hidden">                    
                         <img className="w-full h-full object-cover" src={selectedImage} alt=""/>
                     </div>
                 ) : colorSeleccionado ? (
                     <PostConTexto colorSeleccionado={colorSeleccionado} changeAlign={changeAlign} fontChange={fontChange} changeSize={changeSize} colorSeleccionadoTexto={colorSeleccionadoTexto} write={write} valueTextarea={valueTextarea} inputRef={inputRef} setValueTextarea={setValueTextarea}/>
                 ) 
                 : picDone ? (
-                    <div className="picDone relative h-[375px] w-[375px] mt-6 ">
+                    <div className="picDone relative mx-auto h-[375px] w-[375px] max-w-full box-border mt-6">
                         <div className="w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center grid items-center" >
                             <img src={picDone} alt="Foto capturada" className="w-full h-full object-cover" />
                             {/* <textarea 
@@ -407,7 +405,7 @@ export const Publish = () => {
                     </div>
                 ) 
                 : videoRender ? (
-                        <div className="h-[375px] w-[375px] mt-6 p-0 overflow-hidden relative flex flex-col justify-end items-center">
+                        <div className="h-[375px] w-[375px] mt-6 p-0 overflow-hidden max-w-full mx-auto relative flex flex-col justify-end items-center">
                             <img src="" alt="" className="hidden" ref={imageR}/>
                             <video className="mostrar-video h-full w-full object-cover object-center" autoPlay ref={videoRef}></video>
                             <button onClick={tomarFoto} className="absolute bottom-5 py-2 px-4 bg-white rounded-md">Capturar</button>
@@ -434,7 +432,7 @@ export const Publish = () => {
                     
                 
                     {/* BOTON COLOR DE FONDO */}
-                    <ColorPicker sendClean={handleColorPickerClick} onColorChange={manejarCambioColor} />
+                    <ColorPicker background sendClean={handleColorPickerClick} onColorChange={manejarCambioColor} />
                     
 
                     {/* BOTON TEXTO, activado o desactivado */}
@@ -549,9 +547,8 @@ export const Publish = () => {
                             
                         <datalist id="datalistForInput">
                             {mockEtiquetas.map((etiqueta) => (
-                                <div>
-                                    <option key={etiqueta.id} value={etiqueta.name}>{etiqueta.name}</option>
-                                    
+                                <div key={etiqueta.id}>
+                                    <option value={etiqueta.name}>{etiqueta.name}</option>
                                 </div>  
                             ))}
                         </datalist>

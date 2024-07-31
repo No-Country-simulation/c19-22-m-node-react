@@ -5,11 +5,11 @@ export const useAlignChange = () => {
     
 
     const handleChangeAlign = () => {
-        if (changeAlign == 'center')
-        { alignLeft()}
-        else if (changeAlign == 'left')
-            { alignRight()}
-        else {
+        if (changeAlign == 'center') { 
+            alignLeft()
+        } else if (changeAlign == 'left') { 
+            alignRight()
+        } else {
             alignCenter()
         }
     }

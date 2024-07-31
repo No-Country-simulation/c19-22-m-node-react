@@ -1,13 +1,10 @@
-/* import React from "react"; */
+import './postFound.css'
 
 import { HeartOutlineIcon } from "../icons/HeartOutlineIcon";
 import { HeartFilledIcon } from "../icons/HeartFilledIcon";
 import { CommentsIcon } from "../icons/CommentsIcon";
-
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, } from "react";
-/* import user1 from '../../assets/user1.jpg' */
-
 import { PostConTexto } from "../postConTexto/PostConTexto";
 import { urlBase } from "../../constants/urlBase";
 
@@ -19,6 +16,7 @@ export const PostFound = () => {
 
 
     const [postFound, setPostFound] = useState({});
+    const [loading, setLoading] = useState(true);
     const { postId } = useParams()
 
 
@@ -32,7 +30,10 @@ export const PostFound = () => {
         }
     })
     .then((data)=> data.json())
-    .then(data => setPostFound(data.data))
+    .then(data => {
+        setPostFound(data.data)
+        setLoading(false);
+    })
 }, [])
 
 
@@ -90,7 +91,16 @@ const deleteLike = () => {
 }
 
 
-
+if (loading) {
+    return (
+      <section className='profile pt-11'>
+        <div className="flex justify-center">
+          <svg className="spinner" viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+          </svg>
+        </div>
+      </section>)
+  }
 
 
 
@@ -103,7 +113,7 @@ const deleteLike = () => {
                     </div>
                     <p className="font-semibold text-xs">{postFound.username}</p>
                 </div>
-                <div className="post-image w-[375px] h-[375px] overflow-hidden">
+                <div className="post_image mx-auto h-[375px] w-[375px] max-w-full box-border overflow-hidden">
                     {postFound.pic? 
                         <img src={postFound.pic} alt="image post" className="w-full h-full object-cover"/>
                     : <PostConTexto colorSeleccionado={postFound.backgroundColor} changeAlign={postFound.fontAlign} fontChange={postFound.fontFamily} changeSize={postFound.fontSize} colorSeleccionadoTexto={postFound.textColor} write={false} valueTextarea={postFound.content}/>
@@ -112,7 +122,7 @@ const deleteLike = () => {
                 <div className="likes-comments py-3 px-4 flex flex-col gap-1.5 items-start">
                     <div className="fav-comment-icons flex gap-4 items-center">
                            {postFound.isLikedByCurrentUser? 
-                            <button onClick={deleteLike} className="fav"><HeartFilledIcon/></button>
+                            <button onClick={deleteLike} className="fav text-red-600"><HeartFilledIcon/></button>
                             :<button onClick={darLike} className="fav"><HeartOutlineIcon/></button>
                             }
                         <button className="comment"><CommentsIcon/></button>

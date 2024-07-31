@@ -17,7 +17,7 @@ const TextSize = ({ handleChangeSize, changeSize}) => {
 
 
     return (
-        <button onClick={handleChangeSize} className='changuing-size text-white'>                            
+        <button onClick={handleChangeSize} className='changuing_size text-white text-2xl'>                            
             <RxFontSize />
         </button>
     )

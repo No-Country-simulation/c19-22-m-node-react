@@ -21,7 +21,8 @@ export default {
       },
       fontSize: {
         'xxs': '0.6875rem', // 11px
-        'almost-base': '15px'
+        'almost-base': '15px',
+        'almost-xs': '13px'
       },
       borderWidth: {
         '4': '4px',

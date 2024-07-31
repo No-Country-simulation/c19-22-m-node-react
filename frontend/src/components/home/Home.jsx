@@ -27,6 +27,7 @@ import { urlBase } from "../../constants/urlBase";
 export const Home = () => {
 
     const [postHome, setPostHome] = useState([])
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate()
     
@@ -43,9 +44,11 @@ export const Home = () => {
         )
         .then(data => {
             setPostHome(data.data)
+            setLoading(false);
             const token = localStorage.getItem('token')            
             if (!token){            
             navigate('/login')
+            
             }
         })
     }, [navigate])
@@ -118,6 +121,17 @@ export const Home = () => {
         })
     }
 
+
+    if (loading) {
+        return (
+          <section className='profile pt-11'>
+            <div className="flex justify-center">
+              <svg className="spinner" viewBox="25 25 50 50">
+                <circle r="20" cy="50" cx="50"></circle>
+              </svg>
+            </div>
+          </section>)
+      }
     
 
 
@@ -129,29 +143,27 @@ export const Home = () => {
                     <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
                         <img className="w-full h-full object-cover" src={post.userProfilePic} alt="Round Profile Picture Png, Transparent Png@kindpng.com"/>
                     </div>
-                        <p className="font-semibold text-xs">{post.username}</p>
+                        <p className="font-semibold text-almost-xs">{post.username}</p>
                     </div>
-                    <div className="post-image w-[375px] h-[375px] overflow-hidden">
-                        {/* <img src={post.imageUrl} alt="image post" className="w-full h-full object-cover"/> */}                            
+                    <div className="post_image w-[375px] h-[375px] max-w-full overflow-hidden mx-auto box-border">                                                   
                         {post.imageUrl? 
                         <img onClick={() => {}} className="w-full h-full aspect-square object-cover object-center" src={post.imageUrl} alt="" />
-                        : <PostConTexto onClick={() => {}} profile colorSeleccionado={post.backgroundColor} changeAlign={post.fontAlign} fontChange={post.fontFamily} changeSize={post.fontSize} colorSeleccionadoTexto={post.textColor} write={false} valueTextarea={post.content}/>
+                        : <PostConTexto onClick={() => {}} colorSeleccionado={post.backgroundColor} changeAlign={post.fontAlign} fontChange={post.fontFamily} changeSize={post.fontSize} colorSeleccionadoTexto={post.textColor} write={false} valueTextarea={post.content}/>
                         }                        
                     </div>
                     <div className="likes-comments py-3 px-4 flex flex-col gap-1.5 items-start">
                         <div className="fav-comment-icons flex gap-4 items-center">
                             {post.isLikedByCurrentUser? 
-                            <button onClick={()=>deleteLike(post.id)} className="fav"><HeartFilledIcon/></button>
+                            <button onClick={()=>deleteLike(post.id)} className="fav text-red-600"><HeartFilledIcon/></button>
                             :<button onClick={()=>darLike(post.id)} className="fav"><HeartOutlineIcon/></button>
                             }
                             <button className="comment"><CommentsIcon/></button>
                         </div>
-                        <p className="text-xxs">
+                        <p className="text-xs">
                             {post.likes} {post.likes === 1 ? 'like' : 'likes'}
                         </p>
                         <div className="comments">
-                            <p className="text-xxs leading-custom"><strong className="mr-1">{post.username}</strong>{post.description}</p>
-                            {/* <p className="text-xxs leading-custom"><strong className="mr-1">tolaba.abel</strong>Hermosa combinación! De qué marca son?</p> */}
+                            <p className="text-xs leading-custom"><strong className="mr-1">{post.username}</strong>{post.description}</p>                            
                         </div>                
                     </div>
                 </div>

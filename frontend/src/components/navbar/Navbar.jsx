@@ -42,7 +42,7 @@ export const Navbar = () => {
 
 
   return (
-      <section className='navbar sticky bottom-0 mt-auto shadow-up-md bg-primario flex px-4 justify-between items-center'>
+      <section className="navbar fixed bottom-0 left-0 w-full mt-auto shadow-up-md bg-primario flex px-4 justify-between items-center">
         <button onClick={redirectToHome} className="home text-white p-3">
           {pathname == "/home"? <HomeFilledIcon/>: <HomeOutlineIcon/>}
         </button>        

@@ -1,11 +1,15 @@
 import './ColorPicker.scss'
 import { useState, useEffect, useRef } from 'react'
 import colorPickerIcon from '../../assets/iconoColorPicker.png'
+import { X } from '../icons/X'
 
 
 
-const ColorPicker = ({ onColorChange, sendClean, paraPasarRef }) => {
+const ColorPicker = ({ onColorChange, sendClean, paraPasarRef, background, textColor }) => {
     const [showCP, setShowCP] = useState(false)
+
+    
+    console.log('showCP', showCP)
     
     const handleOpenCP = () => {
         setShowCP(true)        
@@ -29,25 +33,31 @@ const ColorPicker = ({ onColorChange, sendClean, paraPasarRef }) => {
     };
 
 
+    let classname =  "h-[375px] w-[375px] mt-6 p-4 mx-auto box-border max-w-full"
+    if (background) {
+        classname =  'color-picker border border-gray-300 shadow-md rounded-[6px] p-3 cursor-pointer'
+    } if (textColor) {
+        classname = 'color-picker p-3 cursor-pointer'
+    }
+
+
     return (
         <div className={showCP ? "mg_menu-active mg_menu" : "mg_menu"}> 
             <div>
-                <button onClick={handleOpenCP} className='color-picker border border-gray-300 shadow-md rounded-[6px] p-3 magnifying-glass_icon_menu'>
+                <button onClick={handleOpenCP} className={classname}>
                     <img src={colorPickerIcon} className="h-[24px] w-[24px]" alt="" />
                 </button>                
             </div>
     
             {showCP && (
-                <div className='mg_menu__backdrop'>
-                    <div className="menucolor">
-                        <div className='flex justify-start items-start text-start  gap-2 pb-2'>
-                            <button onClick={handleCloseCP} className='cursor-pointer text-white'>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                                <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
-                                </svg>
-                            </button>  
-                            <h4 className='text-white text-base'>Paleta de colores</h4>
-                        </div>                                          
+                <div className={`mg_menu__backdrop ${showCP ? 'visible' : ''}`}>
+                <div className="menucolor">
+                    <div className='flex justify-start items-start text-start gap-2 pb-2'>
+                        <button onClick={handleCloseCP} className='cursor-pointer text-white'>
+                            <X/>
+                        </button>  
+                        <h4 className='text-white text-base'>Paleta de colores</h4>
+                    </div>                                          
                         
                         <div className='container-cp py-1 mb-10'>
                             <div className="color-picker">
