@@ -1,1 +1,1 @@
-export const urlBase = "http://viaduct.proxy.rlwy.net:25260"
+export const urlBase = "https://visionart-production.up.railway.app"

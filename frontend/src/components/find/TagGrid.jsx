@@ -27,7 +27,7 @@ export const TagGrid = () => {
           
       })
       .catch((error) => console.error('Error fetching tags:', error));
-  })
+  }, [])
 
     
 
