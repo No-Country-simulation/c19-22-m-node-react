@@ -6,10 +6,14 @@ import { PiTextT } from "react-icons/pi";
 import ColorPicker from '../colorPicker/ColorPicker';
 import { CiTextAlignCenter } from "react-icons/ci";
 import { RiFontSize } from "react-icons/ri";
+import TextAlign from '../textAlign/TextAlign';
+import TextFont from '../textFont/TextFont';
+import TextSize from '../textSize/TextSize';
 
 
 
-const TextButton = ({textColorSelected, readyToWrite}) => {
+
+const TextButton = ({textColorSelected, readyToWrite, crearRef, crearRef1, crearRef2, handleChangeAlign, changeAlign, handleFontChange, fontChange, handleChangeSize, changeSize}) => {
     const [showTEditor, setShowTEditor] = useState(false)
     
 
@@ -18,10 +22,10 @@ const TextButton = ({textColorSelected, readyToWrite}) => {
     readyToWrite(true);
 };
 
-const handleCloseT = () => {
-    setShowTEditor(false);
-    readyToWrite(false);
-};
+    const handleCloseT = () => {
+        setShowTEditor(false);
+        readyToWrite(false);
+    };
 
     const [colorSeleccionado, setColorSeleccionado] = useState('');
 
@@ -30,7 +34,9 @@ const handleCloseT = () => {
         textColorSelected(color)
     };
     
+    
 
+    
 
     return (
         <div className={showTEditor ? "mg_menu-active mg_menu" : "mg_menu"}> 
@@ -50,25 +56,24 @@ const handleCloseT = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                                     </svg>
                                 </button>  
-                                <h4 className='text-white text-base'>Añadir texto</h4>
+                                <h4 className='text-white text-base'>Editar texto</h4>
                             </div>
-                            <button className='cursor-pointer text-white'>
+                            {/* <button className='cursor-pointer text-white'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                                 </svg>
-                            </button>                      
+                            </button> */}                      
                         </div>                                          
                         
                         <div className='container-te py-1 mb-10'>
-                            <button className='aligning-text text-white'>
-                                <CiTextAlignCenter className="h-[24px] w-[24px]"/>
-                            </button>
+                            
+                            <TextAlign paraPasarRef={crearRef1} handleChangeAlign={handleChangeAlign} changeAlign={changeAlign}/>
+                            
+                            <ColorPicker paraPasarRef={crearRef} sendClean={() => {}} onColorChange={manejarCambioColor}/>
 
-                            <ColorPicker sendClean={() => {}} onColorChange={manejarCambioColor}/>
+                            <TextFont paraPasarRef={crearRef2} handleFontChange={handleFontChange} fontChange={fontChange}/>
 
-                            <button className='font-type text-white'>
-                                <RiFontSize className="h-[24px] w-[24px]"/>
-                            </button>
+                            <TextSize handleChangeSize={handleChangeSize}  changeSize={changeSize}/>
                             
                             
                         </div>

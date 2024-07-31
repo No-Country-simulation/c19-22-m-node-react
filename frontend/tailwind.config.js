@@ -21,10 +21,21 @@ export default {
       },
       fontSize: {
         'xxs': '0.6875rem', // 11px
+        'almost-base': '15px'
       },
       borderWidth: {
         '4': '4px',
       },
+      fontFamily: {
+        montserrat: ['Montserrat', 'sans-serif'],
+        playfair: ['Playfair Display', 'serif'],
+        oswald: ['Oswald', 'sans-serif'],
+        dancing: ['Dancing Script', 'cursive'],
+        bitter: ['Bitter', 'serif'],
+      },
+      scale: {
+        '0.12': '0.12'
+      }
     },
   },
   plugins: [],
