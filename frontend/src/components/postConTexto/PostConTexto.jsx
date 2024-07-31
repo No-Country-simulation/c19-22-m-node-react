@@ -3,7 +3,7 @@ import React from "react";
 
 
 
-export const PostConTexto = ({colorSeleccionado, changeAlign, fontChange, changeSize, colorSeleccionadoTexto, write, valueTextarea, inputRef, setValueTextarea, profile, onClick=()=>{}, notifications}) => {
+export const PostConTexto = ({colorSeleccionado, changeAlign, fontChange, changeSize, colorSeleccionadoTexto, write, valueTextarea, inputRef, setValueTextarea, profile, homeAndPost, onClick=()=>{}, notifications}) => {
 
     let classname =  "h-[375px] w-[375px] mt-6 p-4 mx-auto box-border max-w-full"
     if (profile) {
@@ -17,12 +17,21 @@ export const PostConTexto = ({colorSeleccionado, changeAlign, fontChange, change
     } */
   
     
+    let classnameDiv2 = "mx-auto w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center grid items-center"
+
+    if (profile){
+        classnameDiv2 = "mx-auto w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none text-center grid items-center scale-0.3"
+    } 
+    if (homeAndPost){
+        classnameDiv2 = "mx-auto w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none text-center grid items-center scale-50"
+    }
+
   
     return (
         <div className={classname} style={{backgroundColor: colorSeleccionado}} onClick={onClick}>
-                        <div onClick={onClick} className="mx-auto w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center grid items-center" >
+                        <div onClick={onClick} className={classnameDiv2} >
                             {profile? 
-                            <div className={`w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize} text-right`}
+                            <div className={`w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize}`}
                             style={{ color: colorSeleccionadoTexto }}>
                                 {valueTextarea}
                             </div>

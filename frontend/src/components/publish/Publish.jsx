@@ -437,7 +437,7 @@ export const Publish = () => {
 
                     {/* BOTON TEXTO, activado o desactivado */}
                     {colorSeleccionado? (
-                        <TextButton fontChange={fontChange} handleFontChange={handleFontChange} handleChangeAlign={handleChangeAlign} changeAlign={changeAlign} crearRef={focus} crearRef1={focus} crearRef2={focus} readyToWrite={handleWrite} textColorSelected={manejarCambioColorTexto} handleChangeSize={handleChangeSize} changeSize={changeSize} />
+                        <TextButton fontChange={fontChange} handleFontChange={handleFontChange} handleChangeAlign={handleChangeAlign} changeAlign={changeAlign} crearRef={focus} crearRef1={focus} crearRef2={focus} readyToWrite={handleWrite} textColorSelected={manejarCambioColorTexto} handleChangeSize={handleChangeSize} changeSize={changeSize}/>
                     ) : <TextoDesactivado/>}                    
                 </div>
                 
@@ -480,7 +480,7 @@ export const Publish = () => {
                                                 className={` w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize} text-${changeSize}`}
                                                 style={{ color: colorSeleccionadoTexto }}
                                                 disabled={!write}
-                                                value = {valueTextarea}                                            
+                                                value = {valueTextarea}   
                                                 readOnly
                                         ></textarea>
                                     </div>

@@ -35,7 +35,8 @@ export default {
         bitter: ['Bitter', 'serif'],
       },
       scale: {
-        '0.12': '0.12'
+        '0.12': '0.12',
+        '0.3': '0.3'
       }
     },
   },

@@ -104,6 +104,7 @@ if (loading) {
 
 
 
+  console.log('postFount.content', postFound.content)
     return (
         <section className='Home'>            
             <div key={postFound.id}>
@@ -116,7 +117,7 @@ if (loading) {
                 <div className="post_image mx-auto h-[375px] w-[375px] max-w-full box-border overflow-hidden">
                     {postFound.pic? 
                         <img src={postFound.pic} alt="image post" className="w-full h-full object-cover"/>
-                    : <PostConTexto colorSeleccionado={postFound.backgroundColor} changeAlign={postFound.fontAlign} fontChange={postFound.fontFamily} changeSize={postFound.fontSize} colorSeleccionadoTexto={postFound.textColor} write={false} valueTextarea={postFound.content}/>
+                    : <PostConTexto colorSeleccionado={postFound.backgroundColor} changeAlign={postFound.fontAlign} fontChange={postFound.fontFamily} changeSize={postFound.fontSize} colorSeleccionadoTexto={postFound.textColor} write={false} valueTextarea={postFound.content} homeAndPost/>
                     }  
                 </div>
                 <div className="likes-comments py-3 px-4 flex flex-col gap-1.5 items-start">
