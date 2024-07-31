@@ -71,7 +71,8 @@ function App() {
 
           {/* ENTRAR AL PERFIL DE UN AMIGO */}
           <Route path="/find/account/:id" element={ 
-              <div className='min-h-screen flex flex-col'>                
+              <div className='min-h-screen flex flex-col'> 
+                <Header/>               
                 <FriendProfile/>
                 <Navbar/>
               </div> }/>
