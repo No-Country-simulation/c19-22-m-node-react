@@ -15,6 +15,7 @@ import { UploadIcon } from "../icons/UploadIcon.jsx";
 import { CameraIcon } from "../icons/CameraIcon.jsx";
 import { TextoDesactivado } from "../buttons/TextoDesactivado.jsx";
 import { PantallaLimpia } from "./PantallaLimpia.jsx";
+import { urlBase } from "../../constants/urlBase.js";
 
 
 
@@ -62,7 +63,6 @@ export const Publish = () => {
         setPicDone(null)    
    }
 
-   console.log('selected image', selectedImage)
 
    /* useEffect(() => {
     console.log('imageData actualizado:', imageData);
@@ -202,7 +202,7 @@ export const Publish = () => {
 
 
     //FUNCION PARA LIMPIAR LA PANTALLA CUANDO SE TOCA EL SELECCIONADOR DE COLOR DE FONDO
-    const handleColorPickerClick = (bool) => {
+    const handleColorPickerClick = () => {
         setPantallaLimpia(true)
         setValueTextarea('')
         setSelectedImage(null)
@@ -277,7 +277,7 @@ export const Publish = () => {
              })
         }
      
-        const handleDeleteTag = (id) => e => {        
+        const handleDeleteTag = (id) => () => {        
          setSelectedTag({
              ...selectedTag, 
              [id]: ''
@@ -350,7 +350,7 @@ export const Publish = () => {
         }
         
 
-        fetch('http://viaduct.proxy.rlwy.net:25260/api/v1/posts', {
+        fetch(`${urlBase}/api/v1/posts`, {
             method: 'POST',
             body: formData,
             headers: {
@@ -359,7 +359,6 @@ export const Publish = () => {
         })
         .then(data => data.json())
         .then((data)=> {
-            console.log(data)
             navigate('/profile')
         })            
     }

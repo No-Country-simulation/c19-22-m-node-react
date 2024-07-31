@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { urlBase } from "../../constants/urlBase";
 
 
 
@@ -75,9 +76,7 @@ export const EditProfile = () => {
     formData.append('education', form.education)
     formData.append('about', form.about)
 
-    console.log(Object.fromEntries(formData))
-
-    fetch("http://viaduct.proxy.rlwy.net:25260/api/v1/users/profile", {
+    fetch(`${urlBase}/api/v1/users/profile`, {
       method: 'POST',
       body: formData,
       headers: {
@@ -86,14 +85,13 @@ export const EditProfile = () => {
     })
     .then(data => data.json())
     .then((data)=> {
-      console.log(data)
       navigate('/profile')
     })
     .catch(error => console.log(error))
   }
 
   useEffect(() => {
-    fetch("http://viaduct.proxy.rlwy.net:25260/api/v1/users/profile", {
+    fetch(`${urlBase}/api/v1/users/profile`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",

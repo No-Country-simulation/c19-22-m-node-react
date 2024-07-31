@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import logo from "../../assets/logoSVG.svg";
+import { urlBase } from "../../constants/urlBase";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -10,7 +11,7 @@ export const Login = () => {
   let navigate = useNavigate()
 
 
-  const urlFer = "http://viaduct.proxy.rlwy.net:25260/api/v1/users/login";
+  const urlFer = `${urlBase}/api/v1/users/login`;
   
 
   const [showPassword, setShowPassword] = useState(false);
@@ -42,9 +43,7 @@ export const Login = () => {
         } else {
           navigate('/login')
           return
-        } 
-        console.log(data);
-               
+        }                
       }) 
       .catch((error) => {
         console.log(error);        

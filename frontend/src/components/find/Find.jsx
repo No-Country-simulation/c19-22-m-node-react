@@ -5,15 +5,16 @@ import imagePost from "../../assets/imagePost.jpg";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import debounce from 'lodash/debounce';
+import { urlBase } from "../../constants/urlBase";
 
 export const Find = () => {
   const [accountOrTag, setAccountOrTag] = useState('accounts');
   const [query, setQuery] = useState('');
   const [accounts, setAccounts] = useState([]);
   const [tags, setTags] = useState([]);
-  const urlFer = "http://viaduct.proxy.rlwy.net:25260/api/v1/users/users";
+  const urlFer = `${urlBase}/api/v1/users/users`;
   const urlFer2 = (query) => 
-  `http://viaduct.proxy.rlwy.net:25260/api/v1/tags?searchQuery=${query}`
+  `${urlBase}/api/v1/tags?searchQuery=${query}`
 
 
   //focus en lupa

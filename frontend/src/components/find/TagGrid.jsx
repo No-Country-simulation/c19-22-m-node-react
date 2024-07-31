@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect} from "react";
 import { PostConTexto } from "../postConTexto/PostConTexto";
+import { urlBase } from '../../constants/urlBase';
 
 
 
@@ -8,7 +9,7 @@ export const TagGrid = () => {
 
     const [posts, setPosts] = useState([]);
     const { tagId } = useParams()
-    const urlFer2 = `http://viaduct.proxy.rlwy.net:25260/api/v1/posts/search?tagId=${tagId}`
+    const urlFer2 = `${urlBase}/api/v1/posts/search?tagId=${tagId}`
 
 
   useEffect (()=>{
