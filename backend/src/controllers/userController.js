@@ -93,9 +93,7 @@ const register = async (req, res) => {
 		await userRepository.save(user);
 		console.log(user);
 
-		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-			expiresIn: '1h',
-		});
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
 		return res.json({ ok: true, token });
 	} catch (error) {
