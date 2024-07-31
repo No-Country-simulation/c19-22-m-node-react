@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
+import { urlBase } from "../../constants/urlBase";
 
 
 
@@ -16,7 +17,7 @@ export const Register = () => {
   const [errorFetch, setErrorFetch] = useState(null);
 
 
-  const urlFer = "http://viaduct.proxy.rlwy.net:25260/api/v1/users/register"; 
+  const urlFer = `${urlBase}/api/v1/users/register`; 
 
 
   let navigate = useNavigate()
@@ -29,8 +30,6 @@ export const Register = () => {
       setErrorP(false);
     }
   }, [password, repeatP]);
-
-  console.log(password);
 
   function enviar(e) {
     e.preventDefault();
@@ -59,7 +58,6 @@ export const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         /* data.status */
-        console.log("registro exitoso", data);
         const token = data.token
         localStorage.setItem('token', token)
         navigate('/home')

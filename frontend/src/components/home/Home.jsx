@@ -12,6 +12,7 @@ import { HeartOutlineIcon } from "../icons/HeartOutlineIcon";
 import { CommentsIcon } from "../icons/CommentsIcon";
 
 import { PostConTexto } from "../postConTexto/PostConTexto";
+import { urlBase } from "../../constants/urlBase";
 
 /* const mockPosts = [
     { id: 1, tag: 'acuarela', imageUrl: imagePost, username: 'lara.tobala', userProfilePic:user1 , likes: 1, description: 'Me gusta el arte' },
@@ -31,7 +32,7 @@ export const Home = () => {
     
 
     useEffect(()=>{
-        fetch('http://viaduct.proxy.rlwy.net:25260/api/v1/posts/home',{
+        fetch(`${urlBase}/api/v1/posts/home`,{
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -42,7 +43,6 @@ export const Home = () => {
         )
         .then(data => {
             setPostHome(data.data)
-            console.log('data.data', data.data)
             const token = localStorage.getItem('token')            
             if (!token){            
             navigate('/login')
@@ -54,7 +54,7 @@ export const Home = () => {
     
 
     const darLike = (id) => {
-        fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/posts/like/${id}`,
+        fetch(`${urlBase}/api/v1/posts/like/${id}`,
             {
                 method: "POST",
                 headers: {
@@ -66,8 +66,7 @@ export const Home = () => {
         )
         .then(data => data.json())
         .then((data)=> {
-            console.log(data)
-            fetch('http://viaduct.proxy.rlwy.net:25260/api/v1/posts/home',{
+            fetch(`${urlBase}/api/v1/posts/home`,{
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -78,7 +77,6 @@ export const Home = () => {
             )
             .then(data => {
                 setPostHome(data.data)
-                console.log('data.data', data.data)
                 const token = localStorage.getItem('token')            
                 if (!token){            
                 navigate('/login')
@@ -89,7 +87,7 @@ export const Home = () => {
 
 
     const deleteLike = (id) => {
-        fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/posts/like/${id}`,
+        fetch(`${urlBase}/api/v1/posts/like/${id}`,
             {
                 method: "DELETE",
                 headers: {
@@ -101,8 +99,7 @@ export const Home = () => {
         )
         .then(data => data.json())
         .then((data)=> {
-            console.log(data)
-            fetch('http://viaduct.proxy.rlwy.net:25260/api/v1/posts/home',{
+            fetch(`${urlBase}/api/v1/posts/home`,{
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -113,7 +110,6 @@ export const Home = () => {
             )
             .then(data => {
                 setPostHome(data.data)
-                console.log('data.data', data.data)
                 const token = localStorage.getItem('token')            
                 if (!token){            
                 navigate('/login')

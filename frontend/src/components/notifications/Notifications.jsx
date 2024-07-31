@@ -5,6 +5,7 @@ import imagePost from '../../assets/imagePost.jpg'
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect, useCallback } from "react";
 import { PostConTexto } from "../postConTexto/PostConTexto";
+import { urlBase } from "../../constants/urlBase";
 
 
 
@@ -19,7 +20,7 @@ export const Notifications = () => {
 
 
   useEffect(()=>{
-    fetch('http://viaduct.proxy.rlwy.net:25260/api/v1/posts/like',{
+    fetch(`${urlBase}/api/v1/posts/like`,{
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -30,7 +31,6 @@ export const Notifications = () => {
     )
     .then(data => {
         setLikes(data.data)
-        console.log('data.data', data.data)
         const token = localStorage.getItem('token')            
         if (!token){            
         navigate('/login')

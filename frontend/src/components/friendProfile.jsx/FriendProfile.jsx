@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { PostConTexto } from "../postConTexto/PostConTexto";
 import { HamburguerIcon } from "../icons/HamburguerIcon";
+import { urlBase } from "../../constants/urlBase";
 
 
 
@@ -17,7 +18,7 @@ export const FriendProfile = () => {
 
 
   useEffect(()=>{
-    fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/users/searchprofile/${id}`,{
+    fetch(`${urlBase}/api/v1/users/searchprofile/${id}`,{
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -36,7 +37,6 @@ export const FriendProfile = () => {
   //cuando clickean en 1 foto
   const handlePostClick = (post) => {
     navigate(`/post/${post.id}`);
-    console.log('post', post)
   };
 
 

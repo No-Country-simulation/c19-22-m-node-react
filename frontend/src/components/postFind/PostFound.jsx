@@ -9,6 +9,7 @@ import { useState, useEffect, } from "react";
 /* import user1 from '../../assets/user1.jpg' */
 
 import { PostConTexto } from "../postConTexto/PostConTexto";
+import { urlBase } from "../../constants/urlBase";
 
 
 
@@ -23,7 +24,7 @@ export const PostFound = () => {
 
 
   useEffect(()=>{
-    fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/posts/${postId}`,{
+    fetch(`${urlBase}/api/v1/posts/${postId}`,{
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -38,7 +39,7 @@ export const PostFound = () => {
 
 
 const darLike = () => {
-    fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/posts/like/${postId}`,
+    fetch(`${urlBase}/api/v1/posts/like/${postId}`,
         {
             method: "POST",
             headers: {
@@ -50,8 +51,7 @@ const darLike = () => {
     )
     .then(data => data.json())
     .then((data)=> {
-        console.log(data)
-        fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/posts/${postId}`,{
+        fetch(`${urlBase}/api/v1/posts/${postId}`,{
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -65,7 +65,7 @@ const darLike = () => {
 
 
 const deleteLike = () => {
-    fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/posts/like/${postId}`,
+    fetch(`${urlBase}/api/v1/posts/like/${postId}`,
         {
             method: "DELETE",
             headers: {
@@ -77,8 +77,7 @@ const deleteLike = () => {
     )
     .then(data => data.json())
     .then((data)=> {
-        console.log(data)
-        fetch(`http://viaduct.proxy.rlwy.net:25260/api/v1/posts/${postId}`,{
+        fetch(`${urlBase}/api/v1/posts/${postId}`,{
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,

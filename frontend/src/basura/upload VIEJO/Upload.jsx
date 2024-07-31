@@ -31,8 +31,6 @@ const Upload = ({ onImgChange }) => {
         onImgChange(image); // Descomenta esta línea si necesitas enviar la imagen al componente padre
     };
 
-    console.log(showCamEditor)
-
     return (
     
         <div className={showCamEditor ? "mg_menu-active mg_menu" : "mg_menu"}>
