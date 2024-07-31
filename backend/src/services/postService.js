@@ -18,7 +18,6 @@ const create = async (id, data, img) => {
 		...data,
 		fontSize: data.fontSize == '' ? null : data.fontSize,
 		...resImg,
-		creationDate: new Date(),
 		user: { id: userId },
 	};
 
@@ -41,7 +40,8 @@ const getAll = async (userId, tagId) => {
 		.leftJoinAndSelect('comments.user', 'commentUser')
 		.innerJoinAndSelect('post.user', 'user')
 		.where('post.user_id != :userId', { userId })
-		.addOrderBy('comments."creationDate"', 'ASC');
+		.orderBy('post."creationDate"', 'DESC')
+		.addOrderBy('comments."creationDate"', 'DESC');
 
 	if (tagId) queryBuilder.andWhere('tag.id = :tagId', { tagId });
 

@@ -140,6 +140,15 @@ const profile = async (req, res) => {
 			where: { id: req.userId },
 			relations: ['posts'],
 		});
+
+		console.log(req.userId);
+
+		if (user && user.posts) {
+			user.posts.sort(
+				(a, b) => b.creationDate.getTime() - a.creationDate.getTime(),
+			);
+		}
+
 		return res.json(user);
 	} catch (error) {
 		console.log(error);

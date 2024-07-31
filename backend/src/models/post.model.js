@@ -18,7 +18,8 @@ export const Post = new EntitySchema({
 			nullable: true,
 		},
 		creationDate: {
-			type: 'date',
+			type: 'timestamp',
+			default: () => 'CURRENT_TIMESTAMP',
 		},
 		backgroundColor: {
 			type: 'varchar',
