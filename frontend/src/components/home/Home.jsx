@@ -140,9 +140,9 @@ export const Home = () => {
             {postHome?.map((post) => (
                 <div key={post.id} className="post pb-6">
                     <div className="pic-username py-3 px-4 flex gap-3 items-center">
-                    <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
-                        <img className="w-full h-full object-cover" src={post.userProfilePic} alt="Round Profile Picture Png, Transparent Png@kindpng.com"/>
-                    </div>
+                        <div className="pic_circle w-[44px] h-[44px] overflow-hidden rounded-full">
+                            <img className="w-full h-full object-cover" src={post.userProfilePic} alt="Round Profile Picture Png, Transparent Png@kindpng.com"/>
+                        </div>
                         <p className="font-semibold text-almost-xs">{post.username}</p>
                     </div>
                     <div className="post_image w-[375px] h-[375px] max-w-full overflow-hidden mx-auto box-border">                                                   

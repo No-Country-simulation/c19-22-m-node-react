@@ -381,7 +381,7 @@ export const Publish = () => {
                         <img className="w-full h-full object-cover" src={selectedImage} alt=""/>
                     </div>
                 ) : colorSeleccionado ? (
-                    <PostConTexto colorSeleccionado={colorSeleccionado} changeAlign={changeAlign} fontChange={fontChange} changeSize={changeSize} colorSeleccionadoTexto={colorSeleccionadoTexto} write={write} valueTextarea={valueTextarea} inputRef={inputRef} setValueTextarea={setValueTextarea}/>
+                    <PostConTexto colorSeleccionado={colorSeleccionado} changeAlign={changeAlign} fontChange={fontChange} changeSize={changeSize} colorSeleccionadoTexto={colorSeleccionadoTexto} write={write} valueTextarea={valueTextarea} inputRef={inputRef} setValueTextarea={setValueTextarea} publishP1/>
                 ) 
                 : picDone ? (
                     <div className="picDone relative mx-auto h-[375px] w-[375px] max-w-full box-border mt-6">
@@ -460,20 +460,12 @@ export const Publish = () => {
                             {picDone && 
                                 (
                                     <div className="relative w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center grid items-center" >
-                                        <img src={picDone} alt="Foto capturada" className="w-full h-full object-cover" />                                 
-                                        <textarea 
-                                            name="" 
-                                            id=""                                         
-                                            className={`absolute w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize}`}
-                                            style={{ color: colorSeleccionadoTexto }}
-                                            value = {valueTextarea}
-                                            readOnly                                        
-                                        ></textarea>                                    
+                                        <img src={picDone} alt="Foto capturada" className="w-full h-full object-cover" />
                                     </div>                    
                                 )}
                             {colorSeleccionado && (
                                 <div className="h-full w-full p-4" style={{backgroundColor: colorSeleccionado}}>
-                                    <div  className="w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center grid items-center" >
+                                    <div  className="mt-2 p-2 overflow-hidden scale-50 outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none text-center grid items-center">
                                         <textarea 
                                                 name="" 
                                                 id="" 

@@ -108,8 +108,8 @@ if (loading) {
     return (
         <section className='Home'>            
             <div key={postFound.id}>
-                <div className="pic-username py-3 px-4 flex gap-3 items-center">
-                    <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
+                <div className="pic_and_username py-3 px-4 flex gap-3 items-center">
+                    <div className="pic_circle w-[44px] h-[44px] overflow-hidden rounded-full">
                         <img className="w-full h-full object-cover" src={postFound.userPic} alt="Round Profile Picture Png, Transparent Png@kindpng.com"/>
                     </div>
                     <p className="font-semibold text-xs">{postFound.username}</p>
@@ -130,9 +130,9 @@ if (loading) {
                     </div>
                     <p className="text-xxs">
                             {postFound.likes} {postFound.likes === 1 ? 'like' : 'likes'}
-                        </p>
-                    <div className="comments">
-                        <p className="text-xxs leading-custom"><strong className="mr-1">{postFound.username}</strong>{postFound.description}</p>                                
+                    </p>                                   
+                    <div className="post_description mb-4">
+                        <p className="text-xxs mb-4"><strong className="mr-1">{postFound.username}</strong>{postFound.description}</p>                                
                     </div>                
                 </div>
             </div>
