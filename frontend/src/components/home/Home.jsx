@@ -148,7 +148,7 @@ export const Home = () => {
                     <div className="post_image w-[375px] h-[375px] max-w-full overflow-hidden mx-auto box-border">                                                   
                         {post.imageUrl? 
                         <img onClick={() => {}} className="w-full h-full aspect-square object-cover object-center" src={post.imageUrl} alt="" />
-                        : <PostConTexto onClick={() => {}} colorSeleccionado={post.backgroundColor} changeAlign={post.fontAlign} fontChange={post.fontFamily} changeSize={post.fontSize} colorSeleccionadoTexto={post.textColor} write={false} valueTextarea={post.content}/>
+                        : <PostConTexto onClick={() => {}} colorSeleccionado={post.backgroundColor} changeAlign={post.fontAlign} fontChange={post.fontFamily} changeSize={post.fontSize} colorSeleccionadoTexto={post.textColor} write={false} valueTextarea={post.content} homeAndPost/>
                         }                        
                     </div>
                     <div className="likes-comments py-3 px-4 flex flex-col gap-1.5 items-start">
