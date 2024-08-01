@@ -161,6 +161,13 @@ const getProfile = async (req, res) => {
 			where: { id: userId },
 			relations: ['posts'],
 		});
+
+		if (user && user.posts) {
+			user.posts.sort(
+				(a, b) => b.creationDate.getTime() - a.creationDate.getTime(),
+			);
+		}
+
 		return res.json(user);
 	} catch (error) {
 		console.log(error);
