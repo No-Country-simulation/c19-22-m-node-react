@@ -26,7 +26,7 @@ export const PostConTexto = ({colorSeleccionado, changeAlign, fontChange, change
     let classnameDiv2 = "mx-auto w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none overflow-hidden text-center grid items-center"
 
     if (profile){
-        classnameDiv2 = "mx-auto w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none text-center grid items-center scale-0.3"
+        classnameDiv2 = "mx-auto w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none text-center grid items-center"
     } 
     if (homeAndPost){
         classnameDiv2 = "mx-auto w-full h-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none text-center grid items-center"
@@ -38,7 +38,7 @@ export const PostConTexto = ({colorSeleccionado, changeAlign, fontChange, change
         <div className={classname} style={{backgroundColor: colorSeleccionado}} onClick={onClick}>
                         <div onClick={onClick} className={classnameDiv2} >
                             {profile || homeAndPost? 
-                            <div className={`w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize}`}
+                            <div className={`w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize} `}
                             style={{ color: colorSeleccionadoTexto }}>
                                 {valueTextarea}
                             </div>
@@ -47,13 +47,13 @@ export const PostConTexto = ({colorSeleccionado, changeAlign, fontChange, change
                             <textarea onClick={onClick}
                             name="" 
                             id="" 
-                            className={`w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize}`}
+                            className={`w-full h-full content-center box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize}`}
                             style={{ color: colorSeleccionadoTexto }}
                             disabled={!write}
                             value = {valueTextarea}
                             onChange={(e) => {
-                            inputRef.current.style.height = 'auto'
-                            inputRef.current.style.height = (inputRef.current.scrollHeight) + 'px';
+                            /* inputRef.current.style.height = 'auto'
+                            inputRef.current.style.height = (inputRef.current.scrollHeight) + 'px'; */
                             setValueTextarea(e.target.value)
                             }}
                             ref={inputRef}

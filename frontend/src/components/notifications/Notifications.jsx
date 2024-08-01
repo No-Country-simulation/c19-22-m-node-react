@@ -10,7 +10,7 @@ import { urlBase } from "../../constants/urlBase";
 
 
 export const Notifications = () => {
-  /* const [likesCommentsOrFollowes, setLikesCommentsOrFollowers] = useState('likes'); */
+  const [likesCommentsOrFollowes, setLikesCommentsOrFollowers] = useState('likes');
   const [likes, setLikes] = useState([])
   
 
@@ -73,15 +73,15 @@ const handleVisitFriend = (id) => {
   
 
   //cambio de pestaña
-  /* const handleLikesTab = () => {
+  const handleLikesTab = () => {
     setLikesCommentsOrFollowers('likes');
-  };   */
-  /* const handleCommentsTab = () => {
+  };  
+  const handleCommentsTab = () => {
     setLikesCommentsOrFollowers('comments');
   };
   const handleFollowersTab = () => {
     setLikesCommentsOrFollowers('followers');
-  }; */
+  };
 
 
 
@@ -90,28 +90,27 @@ const handleVisitFriend = (id) => {
   return (
       <section className='notifications'>
         {/* BARRA PESTAÑAS */}
-        <div className=" bg-custom-gray-10 flex items-start gap-10 px-4 pb-1 shadow-up-dark-md">
-          <div className='border-b-4 pt-4 pb-3'>
-            <button /* onClick={handleLikesTab} */>
-              <h4 className="font-semibold">Likes</h4>
-            </button>
-            
+        <div className=" bg-custom-gray-10 flex items-start justify-center gap-10 px-4 pt-1 shadow-combined">
+          <div className={`w-[90px] border-b-4 pt-1.5 pb-1 flex justify-center ${likesCommentsOrFollowes === 'likes' ? 'border-primario' : 'border-none'}`}>
+            <button onClick={handleLikesTab}>
+                  <h4 className="font-semibold text-sm">Likes</h4>
+              </button>            
           </div>
-        {/*   <div className={`border-b-4 pt-4 pb-3 ${likesCommentsOrFollowes === 'comments' ? 'border-primario' : 'border-none'}`}>
+          <div className={`w-[90px] border-b-4 pt-1.5 pb-1 flex justify-center ${likesCommentsOrFollowes === 'comments' ? 'border-primario' : 'border-none'}`}>
             <button onClick={handleCommentsTab}>
-                <h4 className="font-semibold">Comentarios</h4>
+                <h4 className="font-semibold text-sm">Comentarios</h4>
             </button>            
           </div>
-          <div className={`border-b-4 pt-4 pb-3 ${likesCommentsOrFollowes === 'followers' ? 'border-primario' : 'border-none'}`}>
+          <div className={`w-[90px] border-b-4 pt-1.5 pb-1 flex justify-center ${likesCommentsOrFollowes === 'followers' ? 'border-primario' : 'border-none'}`}>
             <button onClick={handleFollowersTab}>
-                <h4 className="font-semibold">Seguidores</h4>
+                <h4 className="font-semibold text-sm">Seguidores</h4>
             </button>
-          </div> */}
+          </div>
         </div>
 
 
         {/* CONTENIDO */}
-        <div className="shadow-up-dark-md">
+        <div className="">
           {/* <h2 className="py-2 px-4 font-semibold text-lg">Hoy</h2> */}
           
           <div>

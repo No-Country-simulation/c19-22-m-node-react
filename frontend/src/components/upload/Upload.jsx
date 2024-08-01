@@ -36,7 +36,7 @@ const Upload = ({ sendClean, onImageChange, selectedImage}) => {
     return (
         <div>
             <input type="file" ref={inputFile} className="hidden" accept="image/*" onChange={handleUpload}/>
-            <button onClick={handleOpenInput} className='upload border-gray-300 shadow-md rounded-[6px] p-3 magnifying-glass_icon_menu'>
+            <button onClick={handleOpenInput} className='upload border border-gray-300 shadow-md rounded-[6px] p-3 magnifying-glass_icon_menu'>
                 <UploadIcon/>                 
             </button> 
         </div>

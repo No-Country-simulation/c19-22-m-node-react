@@ -139,7 +139,7 @@ export const Home = () => {
         <section className='Home'>
             {postHome?.map((post) => (
                 <div key={post.id} className="post pb-6">
-                    <div className="pic-username py-3 px-4 flex gap-3 items-center">
+                    <div onClick={()=>navigate(`/find/account/${post.userId}`)} className="pic-username py-3 px-4 flex gap-3 items-center">
                         <div className="pic_circle w-[44px] h-[44px] overflow-hidden rounded-full">
                             <img className="w-full h-full object-cover" src={post.userProfilePic} alt="Round Profile Picture Png, Transparent Png@kindpng.com"/>
                         </div>

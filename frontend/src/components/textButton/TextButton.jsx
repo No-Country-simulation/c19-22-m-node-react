@@ -64,7 +64,7 @@ const TextButton = ({textColorSelected, readyToWrite, crearRef, crearRef1, crear
                             </button> */}                      
                         </div>                                          
                         
-                        <div className='container-te py-1 mb-10'>
+                        <div className='container-te py-1 '>
                             
                             <TextAlign paraPasarRef={crearRef1} handleChangeAlign={handleChangeAlign} changeAlign={changeAlign}/>
                             

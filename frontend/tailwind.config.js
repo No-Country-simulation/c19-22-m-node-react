@@ -22,7 +22,13 @@ export default {
       fontSize: {
         'xxs': '0.6875rem', // 11px
         'almost-base': '15px',
-        'almost-xs': '13px'
+        'almost-xs': '13px',
+        '2xxs': '7.5px',
+        'mitad-sm': '6px',
+        'mitad-2xl': '11px',
+        'tercio-xs': '5px',
+        'tercio-mediano': '6.5px',
+        'tercio-2xl': '8px',
       },
       borderWidth: {
         '4': '4px',
@@ -37,7 +43,8 @@ export default {
       scale: {
         '0.12': '0.12',
         '0.3': '0.3'
-      }
+      },
+      
     },
   },
   plugins: [],

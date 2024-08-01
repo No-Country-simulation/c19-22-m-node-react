@@ -464,12 +464,12 @@ export const Publish = () => {
                                     </div>                    
                                 )}
                             {colorSeleccionado && (
-                                <div className="h-full w-full p-4" style={{backgroundColor: colorSeleccionado}}>
-                                    <div  className="mt-2 p-2 overflow-hidden scale-50 outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none text-center grid items-center">
+                                <div className="h-full w-full p-2" style={{backgroundColor: colorSeleccionado}}>
+                                    <div  className="h-full overflow-hidden outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none text-center grid items-center">
                                         <textarea 
                                                 name="" 
                                                 id="" 
-                                                className={` w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} text-${changeSize} text-${changeSize}`}
+                                                className={`h-full content-center w-full box-border outline-none border-none bg-transparent focus:ring-0 focus:outline-none overflow-hidden resize-none text-${changeAlign} font-${fontChange} ${changeSize == 'lg'&& 'text-2xxs'} ${changeSize == 'sm'&& 'text-mitad-sm'} ${changeSize == '2xl'&& 'text-mitad-2xl'}`}
                                                 style={{ color: colorSeleccionadoTexto }}
                                                 disabled={!write}
                                                 value = {valueTextarea}   

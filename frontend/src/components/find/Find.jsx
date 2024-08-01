@@ -41,13 +41,12 @@ export const Find = () => {
 
 
 // Función de búsqueda DE ACCOUNTS con debounce
-const fetchAccounts = useCallback (
-  
+const fetchAccounts = useCallback (  
   debounce((query) => {    
     fetch(urlFer)
         .then((response) => response.json())
         .then((data) => {
-          const filteredAccounts = data.filter(account => account.username.startsWith(query))
+          const filteredAccounts = data.filter(account => account.username.toLowerCase().includes(query.toLowerCase()))
           setAccounts(filteredAccounts)          
         })
         .catch((error) => console.error('Error fetching accounts:', error));
@@ -99,50 +98,6 @@ useEffect(() => {
 
 
 
-  //LO QUE HIZO FACU
- /*  useEffect(() => {
-    inputRef.current.focus();
-    fetch(urlFer, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-        console.log("estos son los users", data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-
-
-
-  useEffect(() => {
-    fetch(urlFer2, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setHash(data);
-        console.log("estos son los hash", data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
- */
-
-
-
   //FUNCIONES PARA REDIRIGIR AL PERFIL DEL USER CLICKEADO O A GRILLA DE RESULTADOS DE ETIQUETAS
   const handleAccountClick = (account) => {
     navigate(`/find/account/${account.id}`);
@@ -156,44 +111,44 @@ useEffect(() => {
 
   return (
     <section className='notifications'>
-      <div className='header-find py-4 px-4 shadow-md'>
+      <div className='header-find py-4 px-4 '>
         <input
           type="text"
-          className="w-full bg-transparent border-2 border-custom-gray-50 focus:outline-custom-gray-50 pt-3 pr-4 pb-3 pl-5 rounded-md text-sm"
+          className="w-full bg-transparent border-2 border-custom-gray-50 focus:outline-custom-gray-50 pt-3 pr-4 pb-3 pl-5 rounded-md text-sm "
           placeholder="Buscar"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           ref={inputRef}
         />
       </div>
-      <div className="bg-custom-gray-10 flex items-start gap-10 px-4"></div>
+      {/* <div className="bg-custom-gray-10 flex items-start gap-10 px-4"></div> */}
 
-      <div className="bg-custom-gray-10 flex items-center justify-center gap-10 px-4 pb-1 shadow-up-dark-md">
-        <div className={`border-b-4 pt-2 pb-1 w-[188px] flex justify-center ${accountOrTag === 'accounts' ? 'border-primario' : 'border-none'}`}>
-          <button onClick={handleAccountTab}>
-            <h4 className="font-semibold text-sm text-center">Cuentas</h4>
-          </button>
-        </div>
-        <div className={`border-b-4 pt-2 pb-1 w-[188px] flex justify-center ${accountOrTag === 'tags' ? 'border-primario' : 'border-none'}`}>
-          <button onClick={handleHashtagTab}>
-            <h4 className="font-semibold text-sm text-center">Etiquetas</h4>
-          </button>
-        </div>
+      <div className="bg-custom-gray-10 flex items-start justify-center gap-10 px-4 pt-1 mb-2 shadow-combined">
+          <div className={`border-b-4 pt-1 pb-1 w-[188px] flex justify-center ${accountOrTag === 'accounts' ? 'border-primario' : 'border-none'}`}>
+              <button onClick={handleAccountTab}>
+                <h4 className="font-semibold text-sm text-center">Cuentas</h4>
+              </button>
+          </div>
+          <div className={`border-b-4 pt-1 pb-1 w-[188px] flex justify-center ${accountOrTag === 'tags' ? 'border-primario' : 'border-none'}`}>
+              <button onClick={handleHashtagTab}>
+                <h4 className="font-semibold text-sm text-center">Etiquetas</h4>
+              </button>
+          </div>
       </div>
       
-      <div className="shadow-up-dark-md pt-2">
+      <div className="pt-2">
         {accountOrTag === 'accounts' ? (
           <div>
             {accounts.map((account) => (
               <div key={account.id} className="fila-usuario1 py-2 px-4 flex justify-between items-center">
-                <div className="profilepic-nombre flex gap-2 items-center">
-                  <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
-                    <img className='w-full h-full object-cover' src={account.profilePic} alt="" />
-                  </div>
-                  <div className="w-[230px]">
-                    <p onClick={() => handleAccountClick(account)} className="text-almost-xs font-semibold">{account.username}</p>
-                    <p className="text-almost-xs">{account.name}{account.lastname}</p>
-                  </div>
+                <div onClick={() => handleAccountClick(account)} className="profile_information flex gap-2 items-center">
+                    <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
+                        <img className='w-full h-full object-cover' src={account.profilePic} alt="" />
+                    </div>
+                    <div className="w-[230px]">
+                        <p  className="text-almost-xs font-semibold">{account.username}</p>
+                        <p className="text-almost-xs">{account.name}{account.lastname}</p>
+                    </div>
                 </div>
               </div>
             ))}

@@ -25,7 +25,8 @@
     position: absolute;
     width: 100%;        
     top: 0px;
-    padding: 20px;        
+    padding: 20px; 
+    padding-bottom: 10px;       
     transition: top .15s ease-in-out;    
     z-index: 1;
 }

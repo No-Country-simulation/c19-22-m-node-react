@@ -16,5 +16,7 @@
     .leading-custom {
         line-height: 1.3rem; /* 20.8px */
       }
-      
+    .shadow-combined {
+        box-shadow: inset 0px 4px 4px 0px rgba(8, 8, 8, 0.101), 0px 4px 4px 0px rgba(8, 8, 8, 0.20);
+    }
   }
