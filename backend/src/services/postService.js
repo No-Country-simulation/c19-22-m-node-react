@@ -30,10 +30,9 @@ const create = async (id, data, img) => {
 	return ResponseDTO.success('Post created');
 };
 
-const getAll = async (userId, tagId) => {
+const getAll = async (userId) => {
 	const queryBuilder = postRepository
 		.createQueryBuilder('post')
-		.innerJoin('post.tags', 'tag')
 		.leftJoinAndSelect('post.comments', 'comments')
 		.leftJoinAndSelect('post.likes', 'likes')
 		.leftJoinAndSelect('likes.user', 'likeUser')
@@ -42,8 +41,6 @@ const getAll = async (userId, tagId) => {
 		.where('post.user_id != :userId', { userId })
 		.orderBy('post."creationDate"', 'DESC')
 		.addOrderBy('comments."creationDate"', 'DESC');
-
-	if (tagId) queryBuilder.andWhere('tag.id = :tagId', { tagId });
 
 	const posts = await queryBuilder
 		.select([
@@ -56,6 +53,7 @@ const getAll = async (userId, tagId) => {
 			'post.fontFamily',
 			'post.fontAlign',
 			'post.imageUrl',
+			'post.creationDate',
 			'comments.id',
 			'comments.content',
 			'commentUser.id',
