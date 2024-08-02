@@ -465,7 +465,7 @@ export const Publish = () => {
                                 )}
                             {colorSeleccionado && (
                                 <div className="h-full w-full p-2" style={{backgroundColor: colorSeleccionado}}>
-                                    <div  className="h-full overflow-hidden outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none text-center grid items-center">
+                                    <div  className="h-full overflow-hidden outline-none border-none bg-transparent focus:ring-0 focus:outline-none resize-none grid items-center">
                                         <textarea 
                                                 name="" 
                                                 id="" 

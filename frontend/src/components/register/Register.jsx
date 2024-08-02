@@ -83,12 +83,12 @@ export const Register = () => {
   }
 
   return (
-    <section className="register">
-      <div className="shadow-md p-4 flex items-center gap-2.5">
+    <section className="register flex flex-col justify-center items-center">
+      <div className="shadow-md p-4 flex justify-center items-center gap-2.5 w-full">
         <a href="/login">
           <X/>
         </a>
-        <h2 className=" font-bold text-2xl">Registrarme</h2>
+        <h2 className=" font-bold text-2xl w-full max-w-sm">Registrarme</h2>
       </div>
 
       <form className=" p-6 pt-6 pb-6 rounded-lg w-full max-w-sm">

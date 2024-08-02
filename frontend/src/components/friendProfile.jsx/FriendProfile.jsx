@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PostConTexto } from "../postConTexto/PostConTexto";
 import { urlBase } from "../../constants/urlBase";
 import './friendProfile.css'
+import { PostTextoProfile } from "../postTextoProfile/PostTextoProfile";
 
 
 
@@ -81,7 +82,7 @@ export const FriendProfile = () => {
                     <div key={post.id}>
                         {post.imageUrl? 
                         <img onClick={() => handlePostClick(post)} className="w-full h-full aspect-square object-cover object-center" src={post.imageUrl} alt="" />
-                        : <PostConTexto onClick={() => handlePostClick(post)} profile colorSeleccionado={post.backgroundColor} changeAlign={post.fontAlign} fontChange={post.fontFamily} changeSize={post.fontSize} colorSeleccionadoTexto={post.textColor} write={false} valueTextarea={post.content}/>
+                        : <PostTextoProfile onClick={() => handlePostClick(post)} profile colorSeleccionado={post.backgroundColor} changeAlign={post.fontAlign} fontChange={post.fontFamily} changeSize={post.fontSize} colorSeleccionadoTexto={post.textColor} write={false} valueTextarea={post.content}/>
                         }
                     </div>
                 ))}
