@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import logo from "../../assets/logoSVG.svg";
-import { useNavigate } from "react-router-dom";
 import { urlBase } from "../../constants/urlBase";
 
 export const Login = () => {
@@ -125,9 +124,6 @@ export const Login = () => {
               </button>
             </div>
           </div>
-          {errorMessage && (
-            <div className="mb-4 text-center text-red-600">{errorMessage}</div>
-          )}
 
           <button
             onClick={enviar}
