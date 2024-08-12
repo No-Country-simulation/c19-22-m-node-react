@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect} from "react";
-import { PostConTexto } from "../postConTexto/PostConTexto";
+import { PostTextoProfile } from '../postTextoProfile/PostTextoProfile';
 import { urlBase } from '../../constants/urlBase';
+
 
 
 
@@ -51,7 +52,7 @@ export const TagGrid = () => {
                     <div key={post.id}>                            
                             {post.imageUrl? 
                             <img src={post.imageUrl} className="w-full h-full aspect-square object-cover object-center" alt="image post" onClick={() => handleTagClick(post)}/>
-                            : <PostConTexto onClick={() => handleTagClick(post)} colorSeleccionado={post.backgroundColor} changeAlign={post.fontAlign} fontChange={post.fontFamily} changeSize={post.fontSize} colorSeleccionadoTexto={post.textColor} write={false} valueTextarea={post.content} profile/>
+                            : <PostTextoProfile onClick={() => handleTagClick(post)} colorSeleccionado={post.backgroundColor} changeAlign={post.fontAlign} fontChange={post.fontFamily} changeSize={post.fontSize} colorSeleccionadoTexto={post.textColor} write={false} valueTextarea={post.content} profile/>
                             }  
                     </div>
                     ))}  
