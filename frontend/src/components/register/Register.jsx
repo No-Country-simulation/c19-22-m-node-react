@@ -65,10 +65,6 @@ export const Register = () => {
       })
       
 
-      .catch((error) => {
-        console.log(error);
-        setErrorFetch(true);
-      });
     /* el catch lo vamos a usar solo para atrapar errores del servidor */
   }
 
@@ -205,6 +201,9 @@ export const Register = () => {
               </p>
             ))}
         </div>
+        {errorMessage && (
+          <div className="mb-4 text-center text-red-600">{errorMessage}</div>
+        )}
         <button
           onClick={enviar}
           type="submit"

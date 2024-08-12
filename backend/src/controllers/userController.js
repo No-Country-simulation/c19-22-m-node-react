@@ -4,6 +4,7 @@ import AppDataSource from '../config/db.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import { uploadImg } from '../services/uploadImage.js';
 
 const register = async (req, res) => {
 	try {
@@ -92,9 +93,7 @@ const register = async (req, res) => {
 		await userRepository.save(user);
 		console.log(user);
 
-		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-			expiresIn: '1h',
-		});
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
 		return res.json({ ok: true, token });
 	} catch (error) {
@@ -124,9 +123,7 @@ const login = async (req, res) => {
 			return res.status(400).json({ msg: 'Username or password incorrect' });
 		}
 
-		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-			expiresIn: '1h',
-		});
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
 		return res.json({ ok: true, token });
 	} catch (error) {
@@ -139,8 +136,72 @@ const profile = async (req, res) => {
 	try {
 		const user = await AppDataSource.getRepository(User).findOne({
 			where: { id: req.userId },
+			relations: ['posts'],
 		});
+
+		console.log(req.userId);
+
+		if (user && user.posts) {
+			user.posts.sort(
+				(a, b) => b.creationDate.getTime() - a.creationDate.getTime(),
+			);
+		}
+
 		return res.json(user);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Error server' });
+	}
+};
+
+const getProfile = async (req, res) => {
+	const { userId } = req.params;
+	try {
+		const user = await AppDataSource.getRepository(User).findOne({
+			where: { id: userId },
+			relations: ['posts'],
+		});
+
+		if (user && user.posts) {
+			user.posts.sort(
+				(a, b) => b.creationDate.getTime() - a.creationDate.getTime(),
+			);
+		}
+
+		return res.json(user);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Error server' });
+	}
+};
+
+const editProfile = async (req, res) => {
+	try {
+		const userId = Number(req.userId);
+		const data = req.body;
+		const profilePic = req.files?.profilePic;
+
+		if (data.editImage === 'true') {
+			let resImg = { profilePic: null, imageId: null };
+			if (profilePic.mimetype !== 'text/plain') {
+				const res = await uploadImg(profilePic);
+				resImg = {
+					profilePic: res.imageUrl,
+					imageId: res.imageId,
+				};
+			}
+			data.profilePic = resImg.profilePic;
+		}
+
+		delete data.editImage;
+
+		const profile = {
+			...data,
+		};
+
+		await AppDataSource.getRepository(User).update(userId, profile);
+
+		return res.json({ msg: 'Profile edited' });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ msg: 'Error server' });
@@ -250,4 +311,6 @@ export const UserController = {
 	acceptFriendRequest,
 	rejectFriendRequest,
 	getAllUsers,
+	editProfile,
+	getProfile,
 };

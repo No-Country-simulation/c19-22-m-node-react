@@ -5,6 +5,8 @@ import { FriendRequest } from '../models/friendRequest.model.js';
 import { Post } from '../models/post.model.js';
 import { Tag } from '../models/tag.model.js';
 import { Notification } from '../models/notifications.model.js';
+import { Comment } from '../models/comments.model.js';
+import { Like } from '../models/likes.model.js';
 
 const AppDataSource = new DataSource({
 	type: 'postgres',
@@ -15,7 +17,7 @@ const AppDataSource = new DataSource({
 	database: process.env.DB_NAME,
 	synchronize: true,
 	logging: false,
-	entities: [User, FriendRequest, Post, Tag, Notification],
+	entities: [User, FriendRequest, Post, Tag, Notification, Comment, Like],
 	migrations: [],
 	subscribers: [],
 });

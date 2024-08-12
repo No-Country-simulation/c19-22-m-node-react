@@ -5,6 +5,7 @@ const extensionesValidas = ['png', 'jpg', 'jpeg'];
 
 export const uploadImg = async (img) => {
 	const name = img.name.split('.');
+	console.log(img.name);
 	const extension = name[name.length - 1];
 
 	if (!extensionesValidas.includes(extension)) {
@@ -17,7 +18,6 @@ export const uploadImg = async (img) => {
 			upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
 		});
 		// await cloudinary.api.delete_all_resources();
-		console.log(upload);
 		return { imageUrl: upload.url, imageId: upload.public_id };
 	} catch (e) {
 		throw new Error(e);

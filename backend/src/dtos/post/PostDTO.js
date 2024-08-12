@@ -1,10 +1,27 @@
 export default class PostDTO {
-	constructor(post) {
+	constructor(post, userId) {
 		this.id = post.id;
-		this.pic = post.imageUrl;
 		this.username = post.user.username;
 		this.userPic = post.user.profilePic;
-		this.likes = post.likes;
-		this.description = post.content;
+		this.pic = post.imageUrl;
+		this.content = post.content;
+		this.description = post.description;
+		this.backgroundColor = post.backgroundColor;
+		this.textColor = post.textColor;
+		this.fontSize = post.fontSize;
+		this.fontFamily = post.fontFamily;
+		this.fontAlign = post.fontAlign;
+		this.likes = post.likes.length;
+		this.description = post.description;
+		this.isLikedByCurrentUser = post.likes.some(
+			(like) => like.user.id === userId,
+		);
+		this.comments = post.comments.map((comment) => ({
+			id: comment.id,
+			username: comment.user.username,
+			userId: comment.user.id,
+			content: comment.content,
+			profilePic: comment.user.profilePic,
+		}));
 	}
 }

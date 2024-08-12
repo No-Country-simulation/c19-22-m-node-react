@@ -14,7 +14,7 @@ export const User = new EntitySchema({
 		},
 		profilePic: {
 			type: 'varchar',
-			default: '../utils/images.jpg',
+			default: '/images.jpg',
 		},
 		lastname: {
 			type: 'varchar',
@@ -27,6 +27,22 @@ export const User = new EntitySchema({
 		},
 		password: {
 			type: 'varchar',
+		},
+		occupation: {
+			type: 'varchar',
+			nullable: true,
+		},
+		location: {
+			type: 'varchar',
+			nullable: true,
+		},
+		education: {
+			type: 'varchar',
+			nullable: true,
+		},
+		about: {
+			type: 'varchar',
+			nullable: true,
 		},
 	},
 	relations: {
@@ -44,6 +60,17 @@ export const User = new EntitySchema({
 			type: 'one-to-many',
 			target: 'Post',
 			cascade: true,
+			inverseSide: 'user',
+		},
+		comments: {
+			type: 'one-to-many',
+			target: 'Comment',
+			cascade: true,
+			inverseSide: 'user',
+		},
+		likes: {
+			target: 'Like',
+			type: 'one-to-many',
 			inverseSide: 'user',
 		},
 	},

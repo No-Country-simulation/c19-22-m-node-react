@@ -1,4 +1,5 @@
 import { createPostSchema } from './createPost.schema.js';
+import { createProfileSchema } from './createProfile.schema.js';
 import { getPostSchema } from './getPost.schema.js';
 import { getPostsSchema } from './getPosts.schema.js';
 import { loginSchema } from './login.schema.js';
@@ -15,6 +16,7 @@ export const configComponents = {
 			getPost: getPostSchema,
 			response: responseSchema,
 			getPosts: getPostsSchema,
+			createProfile: createProfileSchema,
 		},
 		securitySchemes: {
 			...securitySchema,

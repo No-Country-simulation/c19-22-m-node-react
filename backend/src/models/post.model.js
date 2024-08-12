@@ -13,8 +13,13 @@ export const Post = new EntitySchema({
 			type: 'varchar',
 			nullable: true,
 		},
+		description: {
+			type: 'varchar',
+			nullable: true,
+		},
 		creationDate: {
-			type: 'date',
+			type: 'timestamp',
+			default: () => 'CURRENT_TIMESTAMP',
 		},
 		backgroundColor: {
 			type: 'varchar',
@@ -25,10 +30,14 @@ export const Post = new EntitySchema({
 			nullable: true,
 		},
 		fontSize: {
-			type: 'int',
+			type: 'varchar',
 			nullable: true,
 		},
 		fontFamily: {
+			type: 'varchar',
+			nullable: true,
+		},
+		fontAlign: {
 			type: 'varchar',
 			nullable: true,
 		},
@@ -39,10 +48,6 @@ export const Post = new EntitySchema({
 		imageId: {
 			type: 'varchar',
 			nullable: true,
-		},
-		likes: {
-			type: 'int',
-			default: 0,
 		},
 	},
 	relations: {
@@ -63,6 +68,17 @@ export const Post = new EntitySchema({
 				inverseJoinColumn: { name: 'tagsId', referencedColumnName: 'id' },
 			},
 			inverseSide: 'posts',
+		},
+		comments: {
+			type: 'one-to-many',
+			target: 'Comment',
+			cascade: true,
+			inverseSide: 'post',
+		},
+		likes: {
+			type: 'one-to-many',
+			target: 'Like',
+			inverseSide: 'post',
 		},
 	},
 });

@@ -3,6 +3,10 @@ export const createPostSchema = {
 	properties: {
 		content: {
 			type: 'string',
+			example: 'The purpose',
+		},
+		description: {
+			type: 'string',
 			example: 'Post sobre dibujo en lienzo',
 		},
 		backgroundColor: {
@@ -14,16 +18,20 @@ export const createPostSchema = {
 			example: '#0A0A0A',
 		},
 		fontSize: {
-			type: 'integer',
-			example: 14,
+			type: 'string',
+			example: 'small',
 		},
 		fontFamily: {
 			type: 'string',
 			example: 'sans',
 		},
-		tagId: {
-			type: 'int',
-			example: 1,
+		fontAlign: {
+			type: 'string',
+			example: 'center',
+		},
+		tags: {
+			type: 'string',
+			example: '1, 2, 3',
 		},
 		img: {
 			type: 'string',
