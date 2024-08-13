@@ -16,15 +16,15 @@ const TextFont = ({ handleFontChange, fontChange, paraPasarRef}) => {
         <button onClick={handleFontChange} className='text-font text-white'>                              
                             
             {fontChange == 'montserrat'? (
-                <p className="h-[24px] w-[24px] font-montserrat">Aa</p>
+                <p className="h-[30px] w-[30px] text-lg font-montserrat">Aa</p>
             ): fontChange == 'playfair'?(
-                <p className="h-[24px] w-[24px] font-playfair">Aa</p>                
+                <p className="h-[30px] w-[30px] text-lg font-playfair">Aa</p>                
             ) : fontChange == 'oswald'?(
-                <p className="h-[24px] w-[24px] font-oswald">Aa</p>
+                <p className="h-[30px] w-[30px] text-lg font-oswald">Aa</p>
             ) : fontChange == 'dancing'?(
-                <p className="h-[24px] w-[24px] font-dancing">Aa</p>
+                <p className="h-[30px] w-[30px] text-lg font-dancing">Aa</p>
             ) : (
-                <p className="h-[24px] w-[24px] font-bitter">Aa</p>
+                <p className="h-[30px] w-[30px] text-lg font-bitter">Aa</p>
             )            
             }
         </button>

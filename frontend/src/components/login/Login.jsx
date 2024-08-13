@@ -1,29 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"
 import logo from "../../assets/logoSVG.svg";
-import { useNavigate } from "react-router-dom";
+import { urlBase } from "../../constants/urlBase";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate();
+  let navigate = useNavigate()
 
-  const urlFer = "http://localhost:3000/api/v1/users/login";
-  /* const [errorFetch, setErrorFetch] = useState(null) */
 
-  /* const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(null) */
-
-  /* useEffect(()=>{
-    if (!name || !password){
-        setErroIncompleteFields(true)
-        return
-    }
-    else {
-        setErroIncompleteFields(false)
-    }
-}, [password, name])  */
+  const urlFer = `${urlBase}/api/v1/users/login`;
+  
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -46,37 +35,22 @@ export const Login = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          navigate("/");
+      .then((data) => {        
+        const token = data.token
+        localStorage.setItem('token', token)
+        if (token){
+          navigate('/home')
         } else {
-          // Manejo de otros casos si el token no está presente pero la solicitud fue exitosa
-          setErrorMessage(
-            "No se pudo iniciar sesión con las credenciales proporcionadas."
-          );
-        }
-      })
+          navigate('/login')
+          return
+        }                
+      }) 
       .catch((error) => {
-        setErrorMessage(error.message || "Error al conectar con el servidor");
-      });
+        console.log(error);        
+      }); 
   }
-  /* en el then vamos a capturar mensajes del servidor */
-  /* Fer va a ponerle una propiedad a data para que si esa propiedad es true, yo voy a 
-      hacer un condicional, de que si es true se setee por ejemplo el estado de usernameAlreadyExists en true
-      y en el return del componente voy a hacer un renderizado condicional como con los otros mensajes */
 
-  // setErrorFetch(true)
-
-  /* el catch lo vamos a usar solo para atrapar errores del servidor */
-
-  /* if (errorFetch) {
-        return (
-            <div>
-                <p>No puedes acceder a tu cuenta por ahora</p>
-            </div>
-        )
-    } */
+  
 
   return (
     <section className="login h-[640px] flex flex-col gap-12 items-center justify-center">
@@ -121,14 +95,7 @@ export const Login = () => {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-custom-gray-80 "
-                /* style={{
-                                        height: 'calc(100% - 2px)',
-                                        top: '1px',
-                                        right: '1px',
-                                        borderTopRightRadius: '0.5rem',
-                                        borderBottomRightRadius: '0.5rem',
-                                    }} */
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-custom-gray-80 "                
               >
                 {showPassword ? (
                   <svg
@@ -157,9 +124,6 @@ export const Login = () => {
               </button>
             </div>
           </div>
-          {errorMessage && (
-            <div className="mb-4 text-center text-red-600">{errorMessage}</div>
-          )}
 
           <button
             onClick={enviar}

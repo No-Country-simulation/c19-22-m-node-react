@@ -59,7 +59,7 @@ export const Followers = () => {
 
           <div className="fila-usuario1 py-2 px-4 flex justify-between items-center">
               <div className="profilepic-nombre flex gap-2 items-center">
-              <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
+                <div className="para-recortar-foto w-[44px] h-[44px] overflow-hidden rounded-full">
                     <img className='w-full h-full object-cover' src={user1} alt="" />
                 </div>
                 <p className="font-semibold text-sm">massino.taina</p>

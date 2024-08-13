@@ -1,6 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { urlBase } from "../../constants/urlBase";
+import { X } from "../icons/X";
+
+
+
 
 export const Register = () => {
   const [name, setName] = useState(null);
@@ -9,16 +14,14 @@ export const Register = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [repeatP, setRepeatP] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
-
   const [errorP, setErrorP] = useState(null);
-
   const [errorFetch, setErrorFetch] = useState(null);
 
-  const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(null);
 
-  const urlFer = "http://localhost:3000/api/v1/users/register";
+  const urlFer = `${urlBase}/api/v1/users/register`; 
+
+
+  let navigate = useNavigate()
 
   useEffect(() => {
     if (password != repeatP) {
@@ -28,8 +31,6 @@ export const Register = () => {
       setErrorP(false);
     }
   }, [password, repeatP]);
-
-  console.log(password);
 
   function enviar(e) {
     e.preventDefault();
@@ -57,26 +58,17 @@ export const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          navigate("/");
-        } else {
-          // Manejo de otros casos si el token no está presente pero la solicitud fue exitosa
-          setErrorMessage(
-            "No se pudo registrar con las credenciales proporcionadas..."
-          );
-        }
+        /* data.status */
+        const token = data.token
+        localStorage.setItem('token', token)
+        navigate('/home')
       })
-      .catch((error) => {
-        setErrorMessage(error.message || "Error al conectar con el servidor");
-      });
-    /* en el then vamos a capturar mensajes del servidor */
-    /* Fer va a ponerle una propiedad a data para que si esa propiedad es true, yo voy a 
-      hacer un condicional, de que si es true se setee por ejemplo el estado de usernameAlreadyExists en true
-      y en el return del componente voy a hacer un renderizado condicional como con los otros mensajes */
+      
 
     /* el catch lo vamos a usar solo para atrapar errores del servidor */
   }
+
+
 
   if (errorFetch) {
     return (
@@ -87,22 +79,12 @@ export const Register = () => {
   }
 
   return (
-    <section className="register">
-      <div className="shadow-md p-4 flex items-center gap-2.5">
-        <button>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="size-6">
-            <path
-              fillRule="evenodd"
-              d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        <h2 className=" font-bold text-2xl">Registrarme</h2>
+    <section className="register flex flex-col justify-center items-center">
+      <div className="shadow-md p-4 flex justify-center items-center gap-2.5 w-full">
+        <a href="/login">
+          <X/>
+        </a>
+        <h2 className=" font-bold text-2xl w-full max-w-sm">Registrarme</h2>
       </div>
 
       <form className=" p-6 pt-6 pb-6 rounded-lg w-full max-w-sm">
@@ -234,7 +216,7 @@ export const Register = () => {
       <p className="text-center text-xs pb-6">
         Ya tienes una cuenta?{" "}
         <a
-          href="#"
+          href="/login"
           className="text-secundario font-semibold">
           INICIA SESION
         </a>
