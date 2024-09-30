@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import { urlBase } from "../../constants/urlBase";
 import { X } from "../icons/X";
+import { Header } from "../header/Header";
 
 
 
@@ -31,6 +32,7 @@ export const Register = () => {
       setErrorP(false);
     }
   }, [password, repeatP]);
+
 
   function enviar(e) {
     e.preventDefault();
@@ -63,9 +65,10 @@ export const Register = () => {
         localStorage.setItem('token', token)
         navigate('/home')
       })
-      
-
-    /* el catch lo vamos a usar solo para atrapar errores del servidor */
+      .catch (error =>{
+        console.log(error)
+        setErrorFetch(true)
+      })
   }
 
 
@@ -73,7 +76,8 @@ export const Register = () => {
   if (errorFetch) {
     return (
       <div>
-        <p>No puedes crear una cuenta por ahora</p>
+        <Header/>
+        <p className="text-center text-sm font-semibold mt-8">No puedes crear una cuenta por ahora</p>
       </div>
     );
   }
@@ -185,6 +189,7 @@ export const Register = () => {
             placeholder="********"
             className="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primario focus:border-transparent border-gray-300"
           />
+          {/* esto comentado no tiene que estar en github */}
           {/* {errorP? 
                 <p className="text-custom-errores text-xs">Las contraseñas no coinciden</p>:
                 <p className="text-green-700 text-xs">Las contraseñas coinciden</p>                 
@@ -201,9 +206,9 @@ export const Register = () => {
               </p>
             ))}
         </div>
-        {errorMessage && (
+        {/* {errorMessage && (
           <div className="mb-4 text-center text-red-600">{errorMessage}</div>
-        )}
+        )} */}
         <button
           onClick={enviar}
           type="submit"

@@ -20,7 +20,12 @@ import { PostFound } from './components/postFind/PostFound';
 import { ConfiguracionProfile } from './components/configuracionProfile/ConfiguracionProfile';
 import { EditProfile } from './components/editProfile/EditProfile';
 import { FriendProfile } from './components/friendProfile.jsx/FriendProfile';
-import { HeaderBack } from './components/headerBack/HeaderBack';
+import { HeaderBack } from './components/postFind/headerBack/HeaderBack';
+import { ConfigMailPass } from './components/configMailPass/ConfigMailPass';
+import { ChangePass } from './components/configMailPass/ChangePass';
+import { ChangeMail } from './components/configMailPass/ChangeMail';
+import { ConfigNotif } from './components/configMailPass/ConfigNotif';
+import { OtherTabs } from './components/profile/OtherTabs';
 
 
 function App() {
@@ -123,6 +128,12 @@ function App() {
                 <Profile/>
                 <Navbar/>
               </div> }/>
+          <Route path="/otherTabs" element={ 
+              <div className='min-h-screen flex flex-col'>
+                <Header/>
+                <OtherTabs/>
+                <Navbar/>
+              </div> }/>
 
           <Route path="/configuracion" element={ 
               <div className='min-h-screen flex flex-col'>                            
@@ -134,7 +145,27 @@ function App() {
               <div className='min-h-screen flex flex-col'>            
                 <EditProfile/>
                 <Navbar/>
-              </div> }/>            
+              </div> }/> 
+          <Route path="/confignotif" element={ 
+              <div className='min-h-screen flex flex-col'>            
+                <ConfigNotif/>
+                <Navbar/>
+              </div> }/>
+          <Route path="/configmailpass" element={ 
+              <div className='min-h-screen flex flex-col'>            
+                <ConfigMailPass/>
+                <Navbar/>
+              </div> }/>   
+          <Route path="/changepass" element={ 
+              <div className='min-h-screen flex flex-col'>            
+                <ChangePass/>
+                <Navbar/>
+              </div> }/>
+          <Route path="/changemail" element={ 
+              <div className='min-h-screen flex flex-col'>            
+                <ChangeMail/>
+                <Navbar/>
+              </div> }/>   
       </Routes>
     </BrowserRouter>      
     </>
